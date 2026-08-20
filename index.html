@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<div class="gamepad-hud-bar">
+          <span class="gamepad-hud-btn">🌐 VERCEL WIDGET STUDIO BUILDER</span>
+          <span class="gamepad-hud-btn">📦 EXPORT 1-CLICK HTML WIDGET FOR iiSU LAUNCHER</span>
+        </div><!DOCTYPE html>
 <html lang="en" data-theme="retro-crt">
 <head>
   <meta charset="UTF-8" />
@@ -183,10 +186,8 @@
     }
 
     html, body {
-      width: 100vw;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
       background: var(--bg-dark);
       font-family: var(--font-body);
@@ -704,11 +705,10 @@
       min-height: 0;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      align-items: center;
-      justify-items: center;
-      gap: clamp(3px, 1.1cqmin, 8px);
+      gap: clamp(2.5px, 0.9cqmin, 5px);
       width: 100%;
-      padding: clamp(4px, 1cqmin, 8px);
+      margin-top: clamp(2px, 0.8cqh, 4px);
+      padding-top: clamp(2px, 0.8cqh, 4px);
       position: relative;
       z-index: 110;
     }
@@ -1188,6 +1188,153 @@
       color: #000000 !important;
       border-color: #00ff66 !important;
       box-shadow: 0 0 12px rgba(0, 255, 102, 0.5) !important;
+    }
+
+
+    /* CUSTOM MULTI-THEME STUDIO MODAL POPUP */
+    .studio-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .studio-modal-backdrop.active {
+      display: flex !important;
+      opacity: 1 !important;
+    }
+
+    .studio-modal-box {
+      background: var(--bg-arcade);
+      border: 2px solid var(--border-dark);
+      border-radius: clamp(8px, 2cqmin, 14px);
+      padding: clamp(16px, 4cqmin, 24px);
+      max-width: clamp(300px, 80vw, 440px);
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--neon-cyan-glow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+      transform: scale(0.85);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .studio-modal-backdrop.active .studio-modal-box {
+      transform: scale(1) !important;
+    }
+
+    html[data-theme="cozy-acnh"] .studio-modal-box {
+      background: #fdf6ea;
+      border: 2px solid #784824;
+      box-shadow: 0 8px 24px rgba(85, 52, 22, 0.3);
+    }
+
+    html[data-theme="persona-red"] .studio-modal-box {
+      background: #000000 !important;
+      border: 2.5px solid #ff1e42 !important;
+      box-shadow: 0 0 30px #ff1e42, 4px 4px 0px #ffd700 !important;
+      transform: skewX(-4deg);
+    }
+
+    .modal-icon {
+      font-size: clamp(28px, 8cqmin, 42px);
+      line-height: 1;
+      filter: drop-shadow(0 0 8px var(--neon-pink));
+    }
+
+    html[data-theme="persona-red"] .modal-icon {
+      filter: drop-shadow(0 0 10px #ff1e42);
+    }
+
+    .modal-title {
+      font-family: var(--font-title);
+      font-size: clamp(16px, 5cqmin, 24px);
+      color: var(--neon-pink);
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px var(--neon-pink-glow);
+    }
+
+    html[data-theme="cozy-acnh"] .modal-title {
+      color: #553416;
+      text-shadow: none;
+    }
+
+    html[data-theme="persona-red"] .modal-title {
+      font-family: 'Permanent Marker', cursive, sans-serif !important;
+      color: #ffffff !important;
+      background: #ff1e42;
+      padding: 2px 12px;
+      transform: skewX(-6deg);
+      box-shadow: 3px 3px 0px #ffd700;
+      text-shadow: none !important;
+    }
+
+    .modal-message {
+      font-family: var(--font-body);
+      font-size: clamp(11px, 3.5cqmin, 14px);
+      color: var(--text-main);
+      line-height: 1.4;
+      opacity: 0.9;
+    }
+
+    html[data-theme="cozy-acnh"] .modal-message {
+      color: #553416;
+    }
+
+    html[data-theme="persona-red"] .modal-message {
+      font-family: 'Bebas Neue', sans-serif !important;
+      font-size: clamp(13px, 4cqmin, 17px) !important;
+      letter-spacing: 1px;
+      color: #ffffff !important;
+    }
+
+    .modal-btn {
+      background: var(--neon-pink);
+      color: #ffffff;
+      border: 1.5px solid var(--neon-pink);
+      border-radius: clamp(4px, 1.5cqmin, 7px);
+      padding: clamp(6px, 2cqh, 10px) clamp(16px, 5cqmin, 24px);
+      font-family: var(--font-body);
+      font-size: clamp(11px, 3.5cqmin, 14px);
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 0 12px var(--neon-pink-glow);
+      transition: all 0.15s ease;
+      margin-top: 4px;
+    }
+
+    html[data-theme="cozy-acnh"] .modal-btn {
+      background: #7ca876;
+      border-color: #5d8757;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(124, 168, 118, 0.4);
+    }
+
+    html[data-theme="persona-red"] .modal-btn {
+      font-family: 'Bebas Neue', sans-serif !important;
+      font-size: clamp(14px, 4.5cqmin, 18px) !important;
+      letter-spacing: 1.5px;
+      background: #ff1e42 !important;
+      border: 2px solid #ffffff !important;
+      color: #ffffff !important;
+      transform: skewX(-8deg);
+      box-shadow: 3px 3px 0px #ffd700 !important;
+    }
+
+    .modal-btn:hover, .modal-btn:active {
+      transform: scale(1.06);
     }
 
 </style>
@@ -2430,7 +2577,7 @@
         exportBtn.addEventListener('click', () => {
           const validImages = currentConfig.images.filter(img => img !== null && img.dataUrl);
           if (validImages.length === 0) {
-            alert('⚠️ Cannot Export: Please upload at least 1 photo before exporting your iiSU widget!');
+            showStudioModal('NO PHOTOS UPLOADED', 'Please upload at least 1 photo into a Polaroid slot before exporting your iiSU widget!', '⚠️');
             return;
           }
           generateAndDownloadStandaloneWidgetHtml();
@@ -2542,6 +2689,53 @@
       downloadFile(docHtml, 'iiSU_PhotoSlideshow_Widget.html', 'text/html');
     }
 
+
+    // CUSTOM STUDIO MODAL SYSTEM
+    function showStudioModal(title, message, iconStr) {
+      const backdrop = document.getElementById('studioModalBackdrop');
+      const titleEl = document.getElementById('modalTitle');
+      const msgEl = document.getElementById('modalMessage');
+      const iconEl = document.getElementById('modalIcon');
+      const closeBtn = document.getElementById('modalCloseBtn');
+
+      if (titleEl) titleEl.textContent = title || 'NOTICE';
+      if (msgEl) msgEl.textContent = message || '';
+      if (iconEl) iconEl.textContent = iconStr || '📷';
+
+      if (backdrop) {
+        backdrop.style.display = 'flex';
+        void backdrop.offsetWidth;
+        backdrop.classList.add('active');
+      }
+
+      if (closeBtn) {
+        closeBtn.onclick = () => {
+          hideStudioModal();
+          const firstInput = document.getElementById('fileInput0');
+          if (firstInput) firstInput.click();
+        };
+      }
+    }
+
+    function hideStudioModal() {
+      const backdrop = document.getElementById('studioModalBackdrop');
+      if (backdrop) {
+        backdrop.classList.remove('active');
+        setTimeout(() => { backdrop.style.display = 'none'; }, 250);
+      }
+    }
+
   </script>
+
+  <!-- CUSTOM MULTI-THEME STUDIO POPUP MODAL -->
+  <div class="studio-modal-backdrop" id="studioModalBackdrop">
+    <div class="studio-modal-box">
+      <div class="modal-icon" id="modalIcon">📷</div>
+      <div class="modal-title" id="modalTitle">NO PHOTOS UPLOADED</div>
+      <div class="modal-message" id="modalMessage">Please upload at least 1 photo into a Polaroid slot before exporting your iiSU widget!</div>
+      <button type="button" class="modal-btn" id="modalCloseBtn">+ ADD PHOTO NOW</button>
+    </div>
+  </div>
+
 </body>
 </html>
