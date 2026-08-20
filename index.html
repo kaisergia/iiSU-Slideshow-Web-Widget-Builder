@@ -2181,6 +2181,42 @@
           }
         });
 
+        
+        // Intuitive Mouse / Touch Drag Panning on Uploaded Photos
+        let isDragPanning = false;
+        let dragStartX = 0, dragStartY = 0;
+        let startPanX = 0, startPanY = 0;
+
+        const imgWrap = document.getElementById('imgWrap' + idx);
+        if (imgWrap) {
+          imgWrap.addEventListener('pointerdown', (e) => {
+            const slotData = currentConfig.images[idx];
+            if (!slotData) return;
+            isDragPanning = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            startPanX = slotData.panX || 0;
+            startPanY = slotData.panY || 0;
+            imgWrap.setPointerCapture(e.pointerId);
+            e.stopPropagation();
+          });
+
+          imgWrap.addEventListener('pointermove', (e) => {
+            if (!isDragPanning) return;
+            const slotData = currentConfig.images[idx];
+            if (!slotData) return;
+            const dx = e.clientX - dragStartX;
+            const dy = e.clientY - dragStartY;
+            slotData.panX = Math.max(-50, Math.min(50, startPanX + (dx / 3)));
+            slotData.panY = Math.max(-50, Math.min(50, startPanY + (dy / 3)));
+            applySlotTransform(idx);
+            selectSlot(idx);
+          });
+
+          imgWrap.addEventListener('pointerup', () => { isDragPanning = false; });
+          imgWrap.addEventListener('pointercancel', () => { isDragPanning = false; });
+        }
+
         if (removeBtn) {
           removeBtn.addEventListener('click', (e) => {
             e.preventDefault();
