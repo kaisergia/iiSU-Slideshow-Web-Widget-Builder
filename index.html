@@ -117,7 +117,7 @@
       letter-spacing: 2.5px;
       transform: skewX(-9deg) rotate(-1.5deg);
       color: #ffffff !important;
-      background: #000000;
+      background: #10121a;
       padding: 1px 10px;
       border: 2px solid #ff1e42;
       box-shadow: 3px 3px 0px #ff1e42;
@@ -827,7 +827,7 @@
 
     .polaroid-photo-frame {
       flex: 1; width: 100%;
-      background: #000000;
+      background: #10121a;
       border: 1px solid #dcd4c8;
       border-radius: 2px;
       position: relative;
@@ -902,7 +902,8 @@
     }
 
     .polaroid-card.has-image .polaroid-image-wrap { display: block; }
-    .polaroid-img { width: 100%; height: 100%; object-fit: cover; object-position: center; transform-origin: center center; pointer-events: none; will-change: transform; }
+    .polaroid-img { width: 100%; height: 100%; object-fit: cover; object-position: center center; transform-origin: center center; pointer-events: none; will-change: transform; transition: object-fit 0.2s ease; }
+    .polaroid-img.fit-contain { object-fit: contain !important; }
 
     .polaroid-chin { position: absolute; bottom: 0; left: 0; right: 0; height: clamp(10px, 4cqmin, 18px); display: flex; align-items: center; justify-content: center; pointer-events: none; }
     .polaroid-caption { font-family: var(--font-title); font-size: clamp(10px, 3.8cqmin, 16px); color: var(--text-dark); letter-spacing: 0.5px; line-height: 1; }
@@ -1042,7 +1043,7 @@
     }
 
     html[data-theme="persona-red"] .select-input option {
-      background: #000000;
+      background: #10121a;
       color: #ffffff;
     }
 
@@ -1558,10 +1559,11 @@
 
             <div class="slider-wrap">
               <span class="control-label" style="font-size: 0.85em;">ZOOM:</span>
-              <input type="range" class="range-input" id="zoomSlider" min="1.0" max="3.0" step="0.05" value="1.0" />
+              <input type="range" class="range-input" id="zoomSlider" min="0.5" max="3.0" step="0.05" value="1.0" />
               <span class="val-display" id="zoomVal">1.0x</span>
             </div>
 
+            <button type="button" class="btn-action" id="toggleFitCoverBtn" style="padding: 1px 6px; background: rgba(0, 240, 255, 0.2); border-color: var(--neon-cyan); color: #ffffff;">🖼️ Mode: COVER</button>
             <button type="button" class="btn-action" id="resetPanZoomBtn" style="padding: 1px 6px;">Reset</button>
             <button type="button" class="btn-action" id="closePanZoomBtn" style="padding: 1px 6px; background: rgba(255, 30, 66, 0.2); border-color: var(--neon-pink); color: #ffffff;">✖ Close Adjust</button>
           </div>
@@ -2146,6 +2148,8 @@
       const panY = slotData.panY || 0;
       const scale = slotData.scale || 1.0;
       img.style.transform = 'translate3d(' + panX + '%, ' + panY + '%, 0) scale(' + scale + ')';
+      if (slotData.fitMode === 'contain') img.classList.add('fit-contain');
+      else img.classList.remove('fit-contain');
     }
 
     // Setup 5 Polaroid Cards Interaction
@@ -2284,6 +2288,22 @@
           if (zoomVal) zoomVal.textContent = scale.toFixed(2) + 'x';
           applySlotTransform(activeSlotIndex);
           autoSaveConfigInRealTime();
+        });
+      }
+
+      const fitCoverBtn = document.getElementById('toggleFitCoverBtn');
+      if (fitCoverBtn) {
+        fitCoverBtn.addEventListener('click', (e) => {
+          e.preventDefault(); e.stopPropagation();
+          const slotData = currentConfig.images[activeSlotIndex];
+          if (!slotData) return;
+          slotData.fitMode = (slotData.fitMode === 'contain') ? 'cover' : 'contain';
+          const img = document.getElementById('img' + activeSlotIndex);
+          if (img) {
+            if (slotData.fitMode === 'contain') img.classList.add('fit-contain');
+            else img.classList.remove('fit-contain');
+          }
+          fitCoverBtn.textContent = (slotData.fitMode === 'contain') ? '🖼️ Mode: FIT' : '🖼️ Mode: COVER';
         });
       }
 
