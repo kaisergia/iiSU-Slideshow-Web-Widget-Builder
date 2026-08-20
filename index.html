@@ -1498,6 +1498,7 @@
               </div>
             </div>
 
+            <button type="button" class="btn-action" id="toggleAdjustRowBtn" style="background: rgba(255, 42, 133, 0.2); border-color: var(--neon-pink); color: #ffffff; font-weight: 800;">📷 ADJUST PHOTO</button>
             <div style="display: flex; align-items: center; gap: 4px;">
               <span class="control-label">THEME FX:</span>
               <select class="select-input" id="fxToggleSelect">
@@ -1543,7 +1544,7 @@
           </div>
 
           <!-- Controls Row 3: Pan & Zoom Adjuster for Selected Slot -->
-          <div class="controls-row" id="panZoomControlRow" style="border-top: 1px dashed var(--border-dark); padding-top: 4px; margin-top: 2px; display: none;">
+          <div class="controls-row" id="panZoomControlRow" style="border-top: 1px dashed var(--border-dark); padding-top: 4px; margin-top: 2px; display: flex;">
             <span class="control-label" style="color: var(--neon-pink);">📷 ADJUST PHOTO:</span>
             <div class="slider-wrap">
               <span class="control-label" style="font-size: 0.85em;">PAN X:</span>
@@ -2238,6 +2239,21 @@
       const zoomVal = document.getElementById('zoomVal');
       const resetBtn = document.getElementById('resetPanZoomBtn');
       const closeBtn = document.getElementById('closePanZoomBtn');
+      const toggleAdjustBtn = document.getElementById('toggleAdjustRowBtn');
+
+      if (toggleAdjustBtn) {
+        toggleAdjustBtn.addEventListener('click', (e) => {
+          e.preventDefault(); e.stopPropagation();
+          const panZoomRow = document.getElementById('panZoomControlRow');
+          if (panZoomRow) {
+            if (panZoomRow.style.display === 'none') {
+              panZoomRow.style.display = 'flex';
+            } else {
+              panZoomRow.style.display = 'none';
+            }
+          }
+        });
+      }
 
       if (panXSlider) {
         panXSlider.addEventListener('input', (e) => {
