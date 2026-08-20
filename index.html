@@ -1549,12 +1549,12 @@
             <span class="control-label" style="color: var(--neon-pink);">📷 ADJUST PHOTO:</span>
             <div class="slider-wrap">
               <span class="control-label" style="font-size: 0.85em;">PAN X:</span>
-              <input type="range" class="range-input" id="panXSlider" min="-50" max="50" step="1" value="0" />
+              <input type="range" class="range-input" id="panXSlider" min="-100" max="100" step="1" value="0" />
             </div>
 
             <div class="slider-wrap">
               <span class="control-label" style="font-size: 0.85em;">PAN Y:</span>
-              <input type="range" class="range-input" id="panYSlider" min="-50" max="50" step="1" value="0" />
+              <input type="range" class="range-input" id="panYSlider" min="-100" max="100" step="1" value="0" />
             </div>
 
             <div class="slider-wrap">
@@ -2212,8 +2212,8 @@
             if (!slotData) return;
             const dx = e.clientX - dragStartX;
             const dy = e.clientY - dragStartY;
-            slotData.panX = Math.max(-50, Math.min(50, startPanX + (dx / 3)));
-            slotData.panY = Math.max(-50, Math.min(50, startPanY + (dy / 3)));
+            slotData.panX = Math.max(-100, Math.min(100, startPanX + (dx / 2)));
+            slotData.panY = Math.max(-100, Math.min(100, startPanY + (dy / 2)));
             applySlotTransform(idx);
             selectSlot(idx);
           });
