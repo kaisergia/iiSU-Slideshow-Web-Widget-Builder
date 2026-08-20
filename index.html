@@ -2428,6 +2428,11 @@
 
       if (exportBtn) {
         exportBtn.addEventListener('click', () => {
+          const validImages = currentConfig.images.filter(img => img !== null && img.dataUrl);
+          if (validImages.length === 0) {
+            alert('⚠️ Cannot Export: Please upload at least 1 photo before exporting your iiSU widget!');
+            return;
+          }
           generateAndDownloadStandaloneWidgetHtml();
         });
       }
