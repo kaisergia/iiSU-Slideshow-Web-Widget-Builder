@@ -1416,21 +1416,66 @@
     
 
 
-    /* PERSONA 5 EARWIG FACTORY RANSOM-NOTE BLOCKY STYLING (UPPERCASE ENFORCED) */
-    html[data-theme="persona-red"] .config-title,
-    html[data-theme="persona-red"] .control-label,
-    html[data-theme="persona-red"] .trans-chip,
-    html[data-theme="persona-red"] .btn-action,
-    html[data-theme="persona-red"] .select-input,
-    html[data-theme="persona-red"] .polaroid-caption,
-    html[data-theme="persona-red"] .polaroid-upload-text,
-    html[data-theme="persona-red"] .modal-title,
-    html[data-theme="persona-red"] .modal-message,
-    html[data-theme="persona-red"] .modal-btn,
-    html[data-theme="persona-red"] .gamepad-hud-btn {
+    
+    /* PERSONA 5 REFINED TYPOGRAPHY HIERARCHY (PERFECT LEGIBILITY + P5 RANSOM STYLE) */
+    html[data-theme="persona-red"] {
+      --font-title: 'Earwig Factory', 'Permanent Marker', 'Bebas Neue', cursive, sans-serif;
+      --font-body: 'Bebas Neue', 'Permanent Marker', sans-serif;
+    }
+
+    /* Main Big Headers & Action Buttons: Earwig Factory Ransom-Note Style */
+    html[data-theme="persona-red"] .config-title {
       font-family: 'Earwig Factory', cursive, sans-serif !important;
-      text-transform: uppercase !important;
+      font-size: clamp(18px, 5.5cqmin, 26px) !important;
       letter-spacing: 2px !important;
+      text-transform: uppercase !important;
+    }
+
+    html[data-theme="persona-red"] .btn-action,
+    html[data-theme="persona-red"] .gamepad-hud-btn,
+    html[data-theme="persona-red"] .modal-title {
+      font-family: 'Earwig Factory', cursive, sans-serif !important;
+      letter-spacing: 1.5px !important;
+      text-transform: uppercase !important;
+    }
+
+    /* UI Labels, Controls & Subtext: Bold, Clean, Super Legible Bebas Neue / Permanent Marker */
+    html[data-theme="persona-red"] .control-label {
+      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
+      font-size: clamp(14px, 4cqmin, 18px) !important;
+      letter-spacing: 1.5px !important;
+      font-weight: 800 !important;
+      color: #ffffff !important;
+      text-shadow: 1px 1px 0px #000;
+    }
+
+    html[data-theme="persona-red"] .trans-chip {
+      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
+      font-size: clamp(12px, 3.5cqmin, 15px) !important;
+      letter-spacing: 1.2px !important;
+      font-weight: 800 !important;
+    }
+
+    html[data-theme="persona-red"] .select-input {
+      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
+      font-size: clamp(13px, 3.8cqmin, 16px) !important;
+      letter-spacing: 1.2px !important;
+      font-weight: 800 !important;
+    }
+
+    html[data-theme="persona-red"] .polaroid-caption,
+    html[data-theme="persona-red"] .polaroid-upload-text {
+      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
+      font-size: clamp(13px, 3.8cqmin, 16px) !important;
+      letter-spacing: 1.5px !important;
+      font-weight: 800 !important;
+    }
+
+    html[data-theme="persona-red"] .modal-message,
+    html[data-theme="persona-red"] .modal-btn {
+      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
+      letter-spacing: 1.5px !important;
+      font-weight: 800 !important;
     }
 
 </style>
