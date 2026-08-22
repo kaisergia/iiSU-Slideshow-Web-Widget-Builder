@@ -2687,6 +2687,8 @@
       const animMs = Math.round((currentConfig.animSpeed || 0.7) * 1000);
 
       if (incomingBuffer) {
+        incomingBuffer.className = 'slide-buffer';
+        void incomingBuffer.offsetWidth;
         incomingBuffer.style.setProperty('--anim-speed', speedSec);
         incomingBuffer.style.setProperty('--slide-easing', currentConfig.easing || 'ease-in-out');
         incomingBuffer.style.zIndex = '2';
@@ -2917,18 +2919,42 @@
       const resetBtn = document.getElementById('resetPanZoomBtn');
       const closeBtn = document.getElementById('closePanZoomBtn');
       const toggleAdjustBtn = document.getElementById('toggleAdjustRowBtn');
+      const toggleFitBtn = document.getElementById('toggleFitCoverBtn');
+
+      function hidePanZoomRow() {
+        const panZoomRow = document.getElementById('panZoomControlRow');
+        if (panZoomRow) {
+          panZoomRow.classList.add('hidden');
+          panZoomRow.style.setProperty('display', 'none', 'important');
+        }
+      }
+
+      function showPanZoomRow() {
+        const panZoomRow = document.getElementById('panZoomControlRow');
+        if (panZoomRow) {
+          panZoomRow.classList.remove('hidden');
+          panZoomRow.style.removeProperty('display');
+        }
+      }
 
       if (toggleAdjustBtn) {
         toggleAdjustBtn.addEventListener('click', (e) => {
           e.preventDefault(); e.stopPropagation();
           const panZoomRow = document.getElementById('panZoomControlRow');
           if (panZoomRow) {
-            if (panZoomRow.style.display === 'none') {
-              panZoomRow.style.display = 'flex';
+            if (panZoomRow.classList.contains('hidden') || panZoomRow.style.display === 'none') {
+              showPanZoomRow();
             } else {
-              panZoomRow.style.display = 'none';
+              hidePanZoomRow();
             }
           }
+        });
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.preventDefault(); e.stopPropagation();
+          hidePanZoomRow();
         });
       }
 
@@ -2964,9 +2990,8 @@
         });
       }
 
-      const fitCoverBtn = document.getElementById('toggleFitCoverBtn');
-      if (fitCoverBtn) {
-        fitCoverBtn.addEventListener('click', (e) => {
+      if (toggleFitBtn) {
+        toggleFitBtn.addEventListener('click', (e) => {
           e.preventDefault(); e.stopPropagation();
           const slotData = currentConfig.images[activeSlotIndex];
           if (!slotData) return;
@@ -2976,7 +3001,8 @@
             if (slotData.fitMode === 'contain') img.classList.add('fit-contain');
             else img.classList.remove('fit-contain');
           }
-          fitCoverBtn.textContent = (slotData.fitMode === 'contain') ? '🖼️ Mode: FIT' : '🖼️ Mode: COVER';
+          toggleFitBtn.textContent = (slotData.fitMode === 'contain') ? '🖼️ Mode: FIT' : '🖼️ Mode: COVER';
+          autoSaveConfigInRealTime();
         });
       }
 
@@ -2988,25 +3014,20 @@
           slotData.panX = 0;
           slotData.panY = 0;
           slotData.scale = 1.0;
+          slotData.fitMode = 'cover';
           if (panXSlider) panXSlider.value = 0;
           if (panYSlider) panYSlider.value = 0;
           if (zoomSlider) zoomSlider.value = 1.0;
           if (zoomVal) zoomVal.textContent = '1.00x';
+          if (toggleFitBtn) toggleFitBtn.textContent = '🖼️ Mode: COVER';
+          const img = document.getElementById('img' + activeSlotIndex);
+          if (img) img.classList.remove('fit-contain');
           applySlotTransform(activeSlotIndex);
           autoSaveConfigInRealTime();
         });
       }
-
-      if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
-          e.preventDefault(); e.stopPropagation();
-          const panZoomRow = document.getElementById('panZoomControlRow');
-          if (panZoomRow) panZoomRow.style.display = 'none';
-        });
-      }
     }
 
-    // Config Controls Listeners
     function setupConfigControls() {
       // 1. Custom Theme Dropdown Handlers
       setupCustomDropdown('themeDropdown', (val) => {
