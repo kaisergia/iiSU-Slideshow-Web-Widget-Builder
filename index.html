@@ -1402,7 +1402,7 @@
 
 
 
-        .slide-img.fit-contain { object-fit: contain !important; }
+            .slide-img.fit-contain { object-fit: contain !important; }
     .slide-buffer { display: flex; align-items: center; justify-content: center; background: #000000; }
 
     /* =========================================================================
@@ -1459,7 +1459,7 @@
     }
 
     /* =========================================================================
-       2. ANDROID & MOBILE WEB VIEW (CLEAN, NATURAL FLOW, ZERO OVERLAPPING)
+       2. ANDROID & MOBILE WEB VIEW (NATURAL VERTICAL SCROLL, 100% VISIBLE SLOTS)
        ========================================================================= */
     @media (max-width: 768px) {
       html, body {
@@ -1477,26 +1477,33 @@
         width: 100% !important;
         height: auto !important;
         min-height: 100vh !important;
-        overflow: visible !important;
-        padding: 10px 8px 40px 8px !important;
+        max-height: none !important;
+        aspect-ratio: auto !important;
+        overflow-y: visible !important;
+        overflow-x: hidden !important;
+        padding: 12px 10px 60px 10px !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 14px !important;
+        gap: 16px !important;
         box-sizing: border-box !important;
         border: none !important;
         border-radius: 0 !important;
       }
 
+      .config-panel,
       .mode-panel.active {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
         display: flex !important;
         flex-direction: column !important;
-        height: auto !important;
         overflow: visible !important;
-        gap: 14px !important;
+        gap: 16px !important;
         width: 100% !important;
+        box-sizing: border-box !important;
       }
 
-      /* 📱 Top Header Bar: Clean 2-Row Stacked Layout (Never overlaps slots) */
+      /* 📱 Top Header Bar: Clean 2-Row Stacked Grid */
       .config-header {
         position: static !important;
         z-index: auto !important;
@@ -1507,7 +1514,7 @@
         flex-direction: column !important;
         align-items: stretch !important;
         gap: 8px !important;
-        padding: 8px 6px !important;
+        padding: 10px 8px !important;
         box-sizing: border-box !important;
         border-radius: 8px !important;
         flex-shrink: 0 !important;
@@ -1561,35 +1568,61 @@
         justify-content: center !important;
       }
 
-      /* 📸 Polaroid Slots: Horizontal Swipeable Snap Carousel with Zero Overlap */
+      /* 📸 Polaroid Slots: Dedicated 230px Height Swipeable Carousel */
       .polaroid-row {
         position: static !important;
         z-index: auto !important;
+        flex: none !important;
         display: flex !important;
         flex-direction: row !important;
         grid-template-columns: none !important;
         overflow-x: auto !important;
         overflow-y: hidden !important;
         scroll-snap-type: x mandatory !important;
-        padding: 8px 4px 16px 4px !important;
+        height: 230px !important;
+        min-height: 230px !important;
+        padding: 8px 6px 14px 6px !important;
         margin: 0 !important;
         gap: 14px !important;
         -webkit-overflow-scrolling: touch !important;
         width: 100% !important;
         box-sizing: border-box !important;
-        flex-shrink: 0 !important;
       }
 
       .polaroid-card {
-        flex: 0 0 135px !important;
-        width: 135px !important;
-        height: 200px !important;
-        aspect-ratio: 2 / 3 !important;
+        flex: 0 0 140px !important;
+        width: 140px !important;
+        height: 205px !important;
+        min-height: 205px !important;
+        aspect-ratio: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        position: relative !important;
         scroll-snap-align: start !important;
         box-sizing: border-box !important;
       }
 
-      /* 🎛️ Controls Area & Rows: Clean Touch-Friendly Stacking */
+      .polaroid-photo-frame {
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        min-height: 140px !important;
+        height: 140px !important;
+        display: flex !important;
+        position: relative !important;
+      }
+
+      .polaroid-chin {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 28px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      /* 🎛️ Controls Area & Rows: Touch-Friendly Stacking */
       .config-controls-bar {
         display: flex !important;
         flex-direction: column !important;
@@ -1599,6 +1632,7 @@
         position: static !important;
         z-index: auto !important;
         flex-shrink: 0 !important;
+        margin-top: 4px !important;
       }
 
       .controls-row {
@@ -1660,7 +1694,7 @@
         height: 32px !important;
       }
 
-      /* Adjust Photo Row: Clean vertical stacking on mobile */
+      /* Adjust Photo Row */
       #panZoomControlRow {
         display: flex !important;
         flex-direction: column !important;
