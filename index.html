@@ -1690,12 +1690,19 @@
         height: 32px !important;
       }
 
-      /* Adjust Photo Row */
+      /* Adjust Photo Row: Placed IMMEDIATELY BELOW Polaroid Slots on Mobile */
       #panZoomControlRow {
+        order: -1 !important;
         display: flex !important;
         flex-direction: column !important;
         gap: 10px !important;
         align-items: stretch !important;
+        background: rgba(0, 0, 0, 0.45) !important;
+        border: 1.5px dashed var(--neon-pink, #ff2a85) !important;
+        border-radius: 8px !important;
+        padding: 10px 8px !important;
+        margin-bottom: 6px !important;
+        box-sizing: border-box !important;
       }
     }
   </style>
