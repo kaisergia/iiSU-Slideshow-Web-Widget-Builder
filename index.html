@@ -1009,25 +1009,46 @@
     html[data-theme="persona-red"] .polaroid-card:not(.has-image) 
 
     .polaroid-remove-btn {
-      position: absolute;
-      top: clamp(2px, 0.8cqmin, 4px);
-      right: clamp(2px, 0.8cqmin, 4px);
-      width: clamp(15px, 5.2cqmin, 21px);
-      height: clamp(15px, 5.2cqmin, 21px);
-      border-radius: 50%;
-      background: rgba(10, 10, 14, 0.85);
-      border: 1px solid var(--neon-pink);
-      color: var(--neon-pink);
-      font-size: clamp(9px, 3cqmin, 12px);
-      font-weight: 900;
+      position: absolute !important;
+      top: clamp(3px, 1cqmin, 6px) !important;
+      right: clamp(3px, 1cqmin, 6px) !important;
+      width: clamp(18px, 5.5cqmin, 24px) !important;
+      height: clamp(18px, 5.5cqmin, 24px) !important;
+      min-width: clamp(18px, 5.5cqmin, 24px) !important;
+      max-width: clamp(18px, 5.5cqmin, 24px) !important;
+      min-height: clamp(18px, 5.5cqmin, 24px) !important;
+      max-height: clamp(18px, 5.5cqmin, 24px) !important;
+      border-radius: 50% !important;
+      background: rgba(15, 17, 24, 0.9) !important;
+      border: 1.5px solid var(--neon-pink, #ff2a85) !important;
+      color: var(--neon-pink, #ff2a85) !important;
+      font-size: clamp(11px, 3.5cqmin, 14px) !important;
+      font-weight: 900 !important;
+      line-height: 1 !important;
       display: none;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 350;
-      opacity: 0.85;
-      transition: opacity 0.15s, transform 0.15s, background-color 0.15s;
-      pointer-events: auto;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      z-index: 350 !important;
+      opacity: 0.95 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      outline: none !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6) !important;
+      transition: opacity 0.15s, transform 0.15s, background-color 0.15s !important;
+      pointer-events: auto !important;
+    }
+
+    .polaroid-card.has-image .polaroid-remove-btn {
+      display: flex !important;
+    }
+
+    .polaroid-remove-btn:hover,
+    .polaroid-remove-btn:active {
+      opacity: 1 !important;
+      background: var(--neon-pink, #ff2a85) !important;
+      color: #ffffff !important;
+      transform: scale(1.18) !important;
     }
 
     .polaroid-card.has-image .polaroid-remove-btn { display: flex; }
@@ -2026,7 +2047,7 @@
 
         <!-- 5 RETRO POLAROID SLEEVES SIDE-BY-SIDE IN CENTER ROW -->
         <div class="polaroid-row" id="polaroidRow">
-          <!-- Hidden Off-Screen File Inputs Container (Completely Removed From Cards) -->
+          <!-- Hidden Off-Screen File Inputs Container -->
           <div style="display: none !important; position: absolute; visibility: hidden; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
             <input type="file" id="fileInput0" accept="image/*" />
             <input type="file" id="fileInput1" accept="image/*" />
@@ -2046,11 +2067,11 @@
               <div class="polaroid-image-wrap" id="imgWrap0">
                 <img class="polaroid-img" id="img0" alt="Slot 1 Image" />
               </div>
+              <button type="button" class="polaroid-remove-btn" id="removeBtn0" title="Remove Photo">×</button>
             </div>
             <div class="polaroid-chin">
               <span class="polaroid-caption">SLOT 01</span>
             </div>
-            <button type="button" class="polaroid-remove-btn" id="removeBtn0" title="Remove Photo">×</button>
           </div>
 
           <!-- Slot 2 -->
@@ -2064,11 +2085,11 @@
               <div class="polaroid-image-wrap" id="imgWrap1">
                 <img class="polaroid-img" id="img1" alt="Slot 2 Image" />
               </div>
+              <button type="button" class="polaroid-remove-btn" id="removeBtn1" title="Remove Photo">×</button>
             </div>
             <div class="polaroid-chin">
               <span class="polaroid-caption">SLOT 02</span>
             </div>
-            <button type="button" class="polaroid-remove-btn" id="removeBtn1" title="Remove Photo">×</button>
           </div>
 
           <!-- Slot 3 -->
@@ -2082,11 +2103,11 @@
               <div class="polaroid-image-wrap" id="imgWrap2">
                 <img class="polaroid-img" id="img2" alt="Slot 3 Image" />
               </div>
+              <button type="button" class="polaroid-remove-btn" id="removeBtn2" title="Remove Photo">×</button>
             </div>
             <div class="polaroid-chin">
               <span class="polaroid-caption">SLOT 03</span>
             </div>
-            <button type="button" class="polaroid-remove-btn" id="removeBtn2" title="Remove Photo">×</button>
           </div>
 
           <!-- Slot 4 -->
@@ -2100,11 +2121,11 @@
               <div class="polaroid-image-wrap" id="imgWrap3">
                 <img class="polaroid-img" id="img3" alt="Slot 4 Image" />
               </div>
+              <button type="button" class="polaroid-remove-btn" id="removeBtn3" title="Remove Photo">×</button>
             </div>
             <div class="polaroid-chin">
               <span class="polaroid-caption">SLOT 04</span>
             </div>
-            <button type="button" class="polaroid-remove-btn" id="removeBtn3" title="Remove Photo">×</button>
           </div>
 
           <!-- Slot 5 -->
@@ -2118,11 +2139,11 @@
               <div class="polaroid-image-wrap" id="imgWrap4">
                 <img class="polaroid-img" id="img4" alt="Slot 5 Image" />
               </div>
+              <button type="button" class="polaroid-remove-btn" id="removeBtn4" title="Remove Photo">×</button>
             </div>
             <div class="polaroid-chin">
               <span class="polaroid-caption">SLOT 05</span>
             </div>
-            <button type="button" class="polaroid-remove-btn" id="removeBtn4" title="Remove Photo">×</button>
           </div>
 
         </div>
