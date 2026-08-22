@@ -1912,6 +1912,110 @@
       transform: scale(1.15) rotate(5deg) !important;
     }
 
+
+
+    /* =========================================================================
+       PERFECT ANDROID & MOBILE HEADER NO-OVERLAP & TOUCH TARGET FIX
+       ========================================================================= */
+    @media (max-width: 768px) {
+      .widget-container {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 6px 6px 40px 6px !important;
+      }
+
+      .mode-panel.active {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: 100% !important;
+        overflow: visible !important;
+        gap: 14px !important;
+      }
+
+      /* Clean Header at Very Top (Z-Index 200) */
+      .config-header {
+        display: flex !important;
+        flex-direction: column !important;
+        position: relative !important;
+        z-index: 200 !important;
+        margin: 0 0 10px 0 !important;
+        padding: 8px 6px !important;
+        gap: 8px !important;
+        background: rgba(0, 0, 0, 0.95) !important;
+        border-bottom: 2px solid #ff1e42 !important;
+      }
+
+      .config-title {
+        font-size: clamp(14px, 4.5cqmin, 18px) !important;
+        text-align: center !important;
+        padding: 4px 8px !important;
+        margin: 0 !important;
+        transform: skewX(-4deg) !important;
+      }
+
+      .header-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 6px !important;
+        width: 100% !important;
+        z-index: 210 !important;
+        position: relative !important;
+      }
+
+      .header-actions .btn-action {
+        flex: 1 !important;
+        min-height: 48px !important;
+        font-size: clamp(11px, 3cqmin, 13px) !important;
+        text-align: center !important;
+        justify-content: center !important;
+        align-items: center !important;
+        display: flex !important;
+        position: relative !important;
+        z-index: 220 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        touch-action: manipulation !important;
+      }
+
+      /* Polaroid Row Below Header (Z-Index 10) */
+      .polaroid-row {
+        position: relative !important;
+        z-index: 10 !important;
+        margin: 4px 0 10px 0 !important;
+        display: flex !important;
+        grid-template-columns: none !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        padding: 10px 4px !important;
+        gap: 12px !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+
+      .polaroid-card {
+        flex: 0 0 140px !important;
+        width: 140px !important;
+        height: 210px !important;
+        aspect-ratio: 2 / 3 !important;
+        scroll-snap-align: center !important;
+        position: relative !important;
+        z-index: 12 !important;
+      }
+
+      /* Controls Panel */
+      .controls-row {
+        position: relative !important;
+        z-index: 10 !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding: 10px 8px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="fx-enabled">
@@ -2049,7 +2153,7 @@
             <div style="display: flex; align-items: center; gap: 4px;">
               <span class="control-label">THEME:</span>
               <div class="theme-select-box-wrap">
-                <span id="themeBoxIcon" class="theme-box-icon"><img src="" alt="Persona Building" /></span>
+                <span id="themeBoxIcon" class="theme-box-icon"><img src="./assets/images/persona/persona_building_icon.png" alt="Persona Building" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px; display: inline-block;" /></span>
                 <select class="select-input select-with-icon" id="themeSelect">
                   <option value="retro-crt">Retro CRT Arcade</option>
                   <option value="cozy-acnh">Cozy Animal Crossing</option>
@@ -2380,7 +2484,7 @@
       const themeBoxIcon = document.getElementById('themeBoxIcon');
       if (themeBoxIcon) {
         if (currentConfig.theme === 'persona-red') {
-          themeBoxIcon.innerHTML = '<img src="' + PERSONA_BUILDING_ICON_B64 + '" alt="Persona Building" />';
+          themeBoxIcon.innerHTML = '<img src="./assets/images/persona/persona_building_icon.png" alt="Persona Building" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px; display: inline-block;" />';
         } else if (currentConfig.theme === 'cozy-acnh') {
           themeBoxIcon.textContent = '🍃';
         } else if (currentConfig.theme === 'glass-cyber') {
