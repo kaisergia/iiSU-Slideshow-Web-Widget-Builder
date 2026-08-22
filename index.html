@@ -1417,65 +1417,90 @@
 
 
     
-    /* PERSONA 5 REFINED TYPOGRAPHY HIERARCHY (PERFECT LEGIBILITY + P5 RANSOM STYLE) */
+    
+    /* AUTHENTIC PERSONA 5 ANGLED BADGE UI & HIGH-LEGIBILITY TYPOGRAPHY */
     html[data-theme="persona-red"] {
-      --font-title: 'Earwig Factory', 'Permanent Marker', 'Bebas Neue', cursive, sans-serif;
+      --font-title: 'Permanent Marker', 'Bebas Neue', cursive, sans-serif;
       --font-body: 'Bebas Neue', 'Permanent Marker', sans-serif;
     }
 
-    /* Main Big Headers & Action Buttons: Earwig Factory Ransom-Note Style */
+    /* Persona 5 Header: Angled Red/Black Banner with Bold Permanent Marker Text */
     html[data-theme="persona-red"] .config-title {
-      font-family: 'Earwig Factory', cursive, sans-serif !important;
-      font-size: clamp(18px, 5.5cqmin, 26px) !important;
-      letter-spacing: 2px !important;
-      text-transform: uppercase !important;
-    }
-
-    html[data-theme="persona-red"] .btn-action,
-    html[data-theme="persona-red"] .gamepad-hud-btn,
-    html[data-theme="persona-red"] .modal-title {
-      font-family: 'Earwig Factory', cursive, sans-serif !important;
+      font-family: 'Permanent Marker', cursive, sans-serif !important;
+      font-size: clamp(16px, 5cqmin, 24px) !important;
       letter-spacing: 1.5px !important;
       text-transform: uppercase !important;
+      color: #ffffff !important;
+      background: #000000 !important;
+      border-left: 5px solid #ff1e42 !important;
+      padding: 4px 14px !important;
+      transform: skewX(-10deg) !important;
+      box-shadow: -4px 4px 0px #ff1e42 !important;
+      display: inline-block !important;
     }
 
-    /* UI Labels, Controls & Subtext: Bold, Clean, Super Legible Bebas Neue / Permanent Marker */
+    /* Control Labels: Persona 5 Angled Black Badges with White/Yellow Text */
     html[data-theme="persona-red"] .control-label {
       font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
       font-size: clamp(14px, 4cqmin, 18px) !important;
       letter-spacing: 1.5px !important;
       font-weight: 800 !important;
-      color: #ffffff !important;
-      text-shadow: 1px 1px 0px #000;
+      color: #fffb00 !important;
+      background: #000000 !important;
+      border: 1px solid #ff1e42 !important;
+      padding: 2px 8px !important;
+      transform: skewX(-8deg) !important;
+      box-shadow: -2px 2px 0px #ff1e42 !important;
+      text-transform: uppercase !important;
     }
 
+    /* Buttons & Action Badges: Persona 5 Dynamic Tilted Action Cards */
+    html[data-theme="persona-red"] .btn-action,
+    html[data-theme="persona-red"] .gamepad-hud-btn,
+    html[data-theme="persona-red"] .modal-title {
+      font-family: 'Permanent Marker', cursive, sans-serif !important;
+      letter-spacing: 1.5px !important;
+      text-transform: uppercase !important;
+      transform: skewX(-8deg) !important;
+    }
+
+    /* Transition Chips & Select Inputs: P5 Sharp Angled Badges */
     html[data-theme="persona-red"] .trans-chip {
-      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
-      font-size: clamp(12px, 3.5cqmin, 15px) !important;
-      letter-spacing: 1.2px !important;
-      font-weight: 800 !important;
-    }
-
-    html[data-theme="persona-red"] .select-input {
-      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
-      font-size: clamp(13px, 3.8cqmin, 16px) !important;
-      letter-spacing: 1.2px !important;
-      font-weight: 800 !important;
-    }
-
-    html[data-theme="persona-red"] .polaroid-caption,
-    html[data-theme="persona-red"] .polaroid-upload-text {
-      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
+      font-family: 'Bebas Neue', sans-serif !important;
       font-size: clamp(13px, 3.8cqmin, 16px) !important;
       letter-spacing: 1.5px !important;
       font-weight: 800 !important;
+      transform: skewX(-6deg) !important;
+    }
+
+    html[data-theme="persona-red"] .select-input {
+      font-family: 'Bebas Neue', sans-serif !important;
+      font-size: clamp(13px, 3.8cqmin, 16px) !important;
+      letter-spacing: 1.2px !important;
+      font-weight: 800 !important;
+      background: #000000 !important;
+      color: #ffffff !important;
+      border: 1.5px solid #ff1e42 !important;
+      transform: skewX(-6deg) !important;
+    }
+
+    /* Polaroid Card Captions: P5 Black Badge Overlay */
+    html[data-theme="persona-red"] .polaroid-caption {
+      font-family: 'Permanent Marker', cursive, sans-serif !important;
+      font-size: clamp(14px, 4cqmin, 18px) !important;
+      letter-spacing: 1.5px !important;
+      color: #ffffff !important;
+      text-transform: uppercase !important;
+      background: #000000 !important;
+      padding: 2px 10px !important;
+      transform: skewX(-6deg) rotate(-2deg) !important;
+      border-bottom: 2px solid #ff1e42 !important;
     }
 
     html[data-theme="persona-red"] .modal-message,
     html[data-theme="persona-red"] .modal-btn {
-      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
+      font-family: 'Permanent Marker', cursive, sans-serif !important;
       letter-spacing: 1.5px !important;
-      font-weight: 800 !important;
     }
 
 </style>
