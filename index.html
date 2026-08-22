@@ -46,9 +46,7 @@
       font-family: 'Earwig Factory', 'Bebas Neue', sans-serif !important;
     }
 
-    html[data-theme="persona-red"] .polaroid-caption {
-      font-family: 'Earwig Factory', 'Bebas Neue', sans-serif !important;
-    }
+    html[data-theme="persona-red"] .polaroid-caption { font-family: 'Bebas Neue', sans-serif !important; font-size: clamp(12px, 4cqmin, 17px) !important; letter-spacing: 1.2px; color: #ffffff !important; }
 
     html[data-theme="persona-red"] .polaroid-upload-text {
       font-family: 'Earwig Factory', 'Bebas Neue', sans-serif !important;
@@ -1722,8 +1720,13 @@
 
       /* 📷 Adjust Photo Row: Placed IMMEDIATELY below Polaroid Slots on Mobile */
       #panZoomControlRow {
-        order: -1 !important;
-        display: flex; flex-direction: column !important; gap: 10px !important; align-items: stretch !important; margin-top: 0 !important; margin-bottom: 12px !important;
+        order: -1;
+        display: flex;
+        flex-direction: column !important;
+        gap: 10px !important;
+        align-items: stretch !important;
+        margin-top: 0 !important;
+        margin-bottom: 12px !important;
         padding: 10px 8px !important;
         border-top: none !important;
         border-bottom: 1.5px dashed var(--border-dark) !important;
@@ -2665,7 +2668,7 @@
     }
 
     function triggerNextSlide() {
-      const validImages = currentConfig.images.filter(img => img !== null && img !== '');
+      const validImages = currentConfig.images.filter(img => img !== null);
       if (validImages.length <= 1) return;
 
       currentSlideIndex = (currentSlideIndex + 1) % validImages.length;
@@ -2685,25 +2688,15 @@
       const transType = currentConfig.transition || 'fade';
       const animClass = 'trans-' + transType + '-enter';
       const speedSec = (currentConfig.animSpeed || 0.7) + 's';
-      const animMs = Math.round((currentConfig.animSpeed || 0.7) * 1000);
 
       if (incomingBuffer) {
-        incomingBuffer.className = 'slide-buffer';
-        void incomingBuffer.offsetWidth;
         incomingBuffer.style.setProperty('--anim-speed', speedSec);
         incomingBuffer.style.setProperty('--slide-easing', currentConfig.easing || 'ease-in-out');
-        incomingBuffer.style.zIndex = '2';
         incomingBuffer.className = 'slide-buffer active-slide ' + animClass;
       }
 
       if (outgoingBuffer) {
-        outgoingBuffer.style.zIndex = '1';
-        setTimeout(() => {
-          if (activeBufferId !== (outgoingBuffer.id === 'bufferA' ? 'A' : 'B')) {
-            outgoingBuffer.className = 'slide-buffer';
-            outgoingBuffer.style.zIndex = '';
-          }
-        }, animMs + 50);
+        outgoingBuffer.className = 'slide-buffer';
       }
 
       activeBufferId = activeBufferId === 'A' ? 'B' : 'A';
@@ -2922,31 +2915,15 @@
       const toggleAdjustBtn = document.getElementById('toggleAdjustRowBtn');
       const toggleFitBtn = document.getElementById('toggleFitCoverBtn');
 
-      function hidePanZoomRow() {
-        const panZoomRow = document.getElementById('panZoomControlRow');
-        if (panZoomRow) {
-          panZoomRow.classList.add('hidden');
-          panZoomRow.style.setProperty('display', 'none', 'important');
-        }
-      }
-
-      function showPanZoomRow() {
-        const panZoomRow = document.getElementById('panZoomControlRow');
-        if (panZoomRow) {
-          panZoomRow.classList.remove('hidden');
-          panZoomRow.style.removeProperty('display');
-        }
-      }
-
       if (toggleAdjustBtn) {
         toggleAdjustBtn.addEventListener('click', (e) => {
           e.preventDefault(); e.stopPropagation();
           const panZoomRow = document.getElementById('panZoomControlRow');
           if (panZoomRow) {
-            if (panZoomRow.classList.contains('hidden') || panZoomRow.style.display === 'none') {
-              showPanZoomRow();
+            if (panZoomRow.style.display === 'none') {
+              panZoomRow.style.display = 'flex';
             } else {
-              hidePanZoomRow();
+              panZoomRow.style.display = 'none';
             }
           }
         });
@@ -2955,7 +2932,10 @@
       if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
           e.preventDefault(); e.stopPropagation();
-          hidePanZoomRow();
+          const panZoomRow = document.getElementById('panZoomControlRow');
+          if (panZoomRow) {
+            panZoomRow.style.display = 'none';
+          }
         });
       }
 
