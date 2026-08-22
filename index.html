@@ -2549,6 +2549,13 @@
       }
     }
 
+    // WIDGET STATE & INITIALIZATION
+    let activeSlotIndex = 0;
+    let slideshowTimer = null;
+    let currentSlideIndex = 0;
+    let activeBufferId = 'A';
+    let hintToastTimer = null;
+
     const THEME_FX_NAMES = {
       'retro-crt': '⚡ ON (CRT VHS Tracking Line)',
       'cozy-acnh': '⚡ ON (Island Leaves & Visitor NPCs)',
@@ -2593,6 +2600,236 @@
         document.body.classList.remove('fx-enabled');
         if (fxToggleSelect) fxToggleSelect.value = 'off';
       }
+    }
+
+    function initAllListeners() {
+      const leafImgs = document.querySelectorAll('.falling-acnh-leaf');
+      leafImgs.forEach(img => { img.src = LEAF_B64; });
+
+      setupSlotInteractions();
+      setupPanZoomControls();
+      setupConfigControls();
+      setupTouchSwipeUp();
+      setupKeyboardXTrigger();
+      setupGamepadEngine();
+      setupExportAndJsonButtons();
+
+      const setupNowBtn = document.getElementById('setupNowBtn');
+      const cancelConfigBtn = document.getElementById('cancelConfigBtn');
+      const toast = document.getElementById('playerHintToast');
+
+      if (setupNowBtn) {
+        setupNowBtn.addEventListener('click', (e) => {
+          e.preventDefault(); e.stopPropagation(); openConfigMode();
+        });
+      }
+
+      if (cancelConfigBtn) {
+        cancelConfigBtn.addEventListener('click', (e) => {
+          e.preventDefault(); e.stopPropagation(); startPlayerMode();
+        });
+      }
+
+      if (toast) {
+        toast.addEventListener('click', (e) => {
+          e.preventDefault(); e.stopPropagation(); openConfigMode();
+        });
+      }
+    }
+
+    // Touch Swipe-Up Gesture Detection
+    function setupTouchSwipeUp() {
+      const playerViewport = document.getElementById('playerViewport');
+      if (!playerViewport) return;
+
+      let touchStartY = 0;
+      let touchStartX = 0;
+
+      playerViewport.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          touchStartY = e.touches[0].clientY;
+          touchStartX = e.touches[0].clientX;
+        }
+      }, { passive: true });
+
+      playerViewport.addEventListener('touchend', (e) => {
+        if (e.changedTouches.length === 1) {
+          const deltaY = touchStartY - e.changedTouches[0].clientY;
+          const deltaX = Math.abs(touchStartX - e.changedTouches[0].clientX);
+          if (deltaY > 35 && deltaY > deltaX) {
+            openConfigMode();
+          }
+        }
+      }, { passive: true });
+    }
+
+    // Keyboard 'X' Key Config Trigger
+    function setupKeyboardXTrigger() {
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'x' || e.key === 'X') {
+          const playerPanel = document.getElementById('playerPanel');
+          if (playerPanel && playerPanel.classList.contains('active')) {
+            openConfigMode();
+          }
+        }
+      });
+    }
+
+    function initBuilderStudio() {
+      try {
+        initAllListeners();
+        const savedData = loadConfig();
+        if (savedData) {
+          currentConfig = Object.assign({}, defaultConfig, savedData);
+        }
+        applyTheme(currentConfig.theme);
+        applyFxState(currentConfig.fxEnabled);
+        populateConfigUI();
+        openConfigMode();
+      } catch (e) {
+        console.error('DOM Boot Exception:', e);
+        openConfigMode();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', initBuilderStudio);
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      initBuilderStudio();
+    }
+
+    // Player Mode Functions & Hint Toast
+    function startPlayerMode() {
+      const configPanel = document.getElementById('configPanel');
+      const playerPanel = document.getElementById('playerPanel');
+      const playerEmptyState = document.getElementById('playerEmptyState');
+
+      if (configPanel) configPanel.classList.remove('active');
+      if (playerPanel) playerPanel.classList.add('active');
+
+      const validImages = currentConfig.images.filter(img => img !== null);
+      if (validImages.length === 0) {
+        if (playerEmptyState) playerEmptyState.style.display = 'flex';
+        stopSlideshow();
+        stopNpcPopIns();
+        return;
+      }
+
+      if (playerEmptyState) playerEmptyState.style.display = 'none';
+      currentSlideIndex = 0;
+      activeBufferId = 'A';
+
+      const bufferA = document.getElementById('bufferA');
+      const bufferB = document.getElementById('bufferB');
+      const imgBufferA = document.getElementById('imgBufferA');
+
+      const firstImgData = validImages[0];
+      applyImageDataToElement(firstImgData, imgBufferA);
+      if (bufferA) bufferA.className = 'slide-buffer active-slide';
+      if (bufferB) bufferB.className = 'slide-buffer';
+
+      stopSlideshow();
+
+      if (validImages.length > 1) {
+        scheduleNextSlide();
+      }
+
+      if (currentConfig.theme === 'cozy-acnh' && currentConfig.fxEnabled) {
+        scheduleNpcPopIns();
+        setTimeout(maybeTriggerNpcPopIn, 1500);
+      } else {
+        stopNpcPopIns();
+      }
+
+      showPlayerHintToast();
+    }
+
+    function showPlayerHintToast() {
+      const toast = document.getElementById('playerHintToast');
+      if (!toast) return;
+      toast.classList.remove('fade-out');
+      toast.classList.add('show');
+
+      if (hintToastTimer) clearTimeout(hintToastTimer);
+      hintToastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+        toast.classList.add('fade-out');
+      }, 3000);
+    }
+
+    function scheduleNextSlide() {
+      const intervalMs = (currentConfig.duration || 4.0) * 1000;
+      slideshowTimer = setTimeout(() => {
+        triggerNextSlide();
+      }, intervalMs);
+    }
+
+    function triggerNextSlide() {
+      const validImages = currentConfig.images.filter(img => img !== null);
+      if (validImages.length <= 1) return;
+
+      currentSlideIndex = (currentSlideIndex + 1) % validImages.length;
+      const nextImgData = validImages[currentSlideIndex];
+
+      const bufferA = document.getElementById('bufferA');
+      const bufferB = document.getElementById('bufferB');
+      const imgBufferA = document.getElementById('imgBufferA');
+      const imgBufferB = document.getElementById('imgBufferB');
+
+      const incomingBuffer = activeBufferId === 'A' ? bufferB : bufferA;
+      const incomingImg = activeBufferId === 'A' ? imgBufferB : imgBufferA;
+      const outgoingBuffer = activeBufferId === 'A' ? bufferA : bufferB;
+
+      applyImageDataToElement(nextImgData, incomingImg);
+
+      const transType = currentConfig.transition || 'fade';
+      const animClass = 'trans-' + transType + '-enter';
+      const speedSec = (currentConfig.animSpeed || 0.7) + 's';
+
+      if (incomingBuffer) {
+        incomingBuffer.style.setProperty('--anim-speed', speedSec);
+        incomingBuffer.style.setProperty('--slide-easing', currentConfig.easing || 'ease-in-out');
+        incomingBuffer.className = 'slide-buffer active-slide ' + animClass;
+      }
+
+      if (outgoingBuffer) {
+        outgoingBuffer.className = 'slide-buffer';
+      }
+
+      activeBufferId = activeBufferId === 'A' ? 'B' : 'A';
+
+      if (currentConfig.theme === 'persona-red' && currentConfig.fxEnabled) {
+        triggerPersonaTransitionFx();
+      }
+
+      scheduleNextSlide();
+    }
+
+    function triggerPersonaTransitionFx() {
+      const slashLayer = document.querySelector('.persona-slash-layer');
+      if (!slashLayer) return;
+      slashLayer.classList.remove('slash-active');
+      void slashLayer.offsetWidth;
+      slashLayer.classList.add('slash-active');
+      const durationMs = ((currentConfig.animSpeed || 0.7) * 1000) + 300;
+      setTimeout(() => {
+        slashLayer.classList.remove('slash-active');
+      }, durationMs);
+    }
+
+    function stopSlideshow() {
+      if (slideshowTimer) {
+        clearTimeout(slideshowTimer);
+        slideshowTimer = null;
+      }
+    }
+
+    function applyImageDataToElement(imgData, imgElement) {
+      if (!imgData || !imgElement) return;
+      imgElement.src = imgData.dataUrl;
+      const panX = imgData.panX || 0;
+      const panY = imgData.panY || 0;
+      const scale = imgData.scale || 1.0;
+      imgElement.style.transform = 'translate3d(' + panX + '%, ' + panY + '%, 0) scale(' + scale + ')';
     }
 
     function openConfigMode() {
@@ -3240,6 +3477,38 @@
       a.click();
       URL.revokeObjectURL(a.href);
     }
+
+    function initBuilderStudio() {
+      try {
+        const leafImgs = document.querySelectorAll('.falling-acnh-leaf');
+        leafImgs.forEach(img => { img.src = LEAF_B64; });
+
+        setupSlotInteractions();
+        setupPanZoomControls();
+        setupConfigControls();
+        setupGamepadEngine();
+        setupExportAndJsonButtons();
+
+        const savedData = loadConfig();
+        if (savedData) {
+          currentConfig = Object.assign({}, defaultConfig, savedData);
+        }
+        applyTheme(currentConfig.theme);
+        applyFxState(currentConfig.fxEnabled);
+        populateConfigUI();
+        openConfigMode();
+      } catch (e) {
+        console.error('Builder Studio Boot Exception:', e);
+        openConfigMode();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', initBuilderStudio);
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      initBuilderStudio();
+    }
+
+    
 
     function generateAndDownloadStandaloneWidgetHtml() {
       const validImages = currentConfig.images.filter(img => img !== null);
