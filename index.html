@@ -46,7 +46,7 @@
       font-family: 'Earwig Factory', 'Bebas Neue', sans-serif !important;
     }
 
-    html[data-theme="persona-red"] .polaroid-caption { font-family: 'Bebas Neue', sans-serif !important; font-size: clamp(12px, 4cqmin, 17px) !important; letter-spacing: 1.2px; color: #ffffff !important; }
+    
 
     html[data-theme="persona-red"] .polaroid-upload-text {
       font-family: 'Earwig Factory', 'Bebas Neue', sans-serif !important;
@@ -997,12 +997,9 @@
     .polaroid-img.fit-contain { object-fit: contain !important; }
 
     .polaroid-chin { position: absolute; bottom: 0; left: 0; right: 0; height: clamp(10px, 4cqmin, 18px); display: flex; align-items: center; justify-content: center; pointer-events: none; }
-    .polaroid-caption { font-family: var(--font-title); font-size: clamp(10px, 3.8cqmin, 16px); color: var(--text-dark); letter-spacing: 0.5px; line-height: 1; }
+    
 
-    html[data-theme="persona-red"] .polaroid-card:not(.has-image) .polaroid-caption {
-      color: #ffffff !important;
-      font-family: 'Bebas Neue', sans-serif !important;
-    }
+    html[data-theme="persona-red"] .polaroid-card:not(.has-image) 
 
     .polaroid-remove-btn {
       position: absolute;
@@ -1949,6 +1946,51 @@
   
   
     #panZoomControlRow.hidden { display: none !important; }
+  
+
+    /* POLAROID CAPTION TYPOGRAPHY */
+    .polaroid-caption {
+      font-family: var(--font-title);
+      font-size: clamp(10px, 3.8cqmin, 16px);
+      color: var(--text-dark, #111111);
+      letter-spacing: 0.5px;
+      line-height: 1;
+    }
+
+    /* ALL UPLOADED POLAROID PHOTOS GET AUTHENTIC HANDWRITTEN SHARPIE MARKER */
+    .polaroid-card.has-image .polaroid-caption {
+      font-family: 'Permanent Marker', cursive, sans-serif !important;
+      font-size: clamp(11px, 4.2cqmin, 17px) !important;
+      color: #121212 !important;
+      letter-spacing: 1px !important;
+      text-shadow: 0 0 1px rgba(0,0,0,0.4);
+    }
+
+    html[data-theme="persona-red"] .polaroid-card:not(.has-image) .polaroid-caption {
+      color: #ffffff !important;
+      font-family: 'Permanent Marker', 'Bebas Neue', cursive, sans-serif !important;
+      letter-spacing: 1.5px;
+    }
+
+    html[data-theme="cozy-acnh"] .polaroid-card:not(.has-image) .polaroid-caption {
+      color: #553416 !important;
+      font-family: 'Fredoka', cursive, sans-serif !important;
+      font-weight: 700;
+    }
+
+    html[data-theme="retro-crt"] .polaroid-card:not(.has-image) .polaroid-caption {
+      color: var(--neon-cyan) !important;
+      font-family: 'VT323', monospace !important;
+      text-shadow: 0 0 4px var(--neon-cyan-glow);
+    }
+
+    html[data-theme="glass-cyber"] .polaroid-card:not(.has-image) .polaroid-caption {
+      color: #00f0ff !important;
+      font-family: 'Rajdhani', sans-serif !important;
+      font-weight: 700;
+      text-shadow: 0 0 4px #00f0ff;
+    }
+  
   </style>
 </head>
 <body class="fx-enabled">
@@ -2580,6 +2622,16 @@
     }
 
     function initBuilderStudio() {
+
+      const playBtn = document.getElementById('playSlideshowBtn');
+      if (playBtn) {
+        playBtn.addEventListener('click', (e) => {
+          e.preventDefault(); e.stopPropagation();
+          saveConfig(currentConfig);
+          startPlayerMode();
+        });
+      }
+  
       try {
         initAllListeners();
         const savedData = loadConfig();
@@ -2688,15 +2740,25 @@
       const transType = currentConfig.transition || 'fade';
       const animClass = 'trans-' + transType + '-enter';
       const speedSec = (currentConfig.animSpeed || 0.7) + 's';
+      const animMs = Math.round((currentConfig.animSpeed || 0.7) * 1000);
 
       if (incomingBuffer) {
+        incomingBuffer.className = 'slide-buffer';
+        incomingBuffer.style.zIndex = '2';
         incomingBuffer.style.setProperty('--anim-speed', speedSec);
         incomingBuffer.style.setProperty('--slide-easing', currentConfig.easing || 'ease-in-out');
+        void incomingBuffer.offsetWidth;
         incomingBuffer.className = 'slide-buffer active-slide ' + animClass;
       }
 
       if (outgoingBuffer) {
-        outgoingBuffer.className = 'slide-buffer';
+        outgoingBuffer.style.zIndex = '1';
+        setTimeout(() => {
+          if (outgoingBuffer !== incomingBuffer) {
+            outgoingBuffer.className = 'slide-buffer';
+            outgoingBuffer.style.zIndex = '';
+          }
+        }, animMs + 60);
       }
 
       activeBufferId = activeBufferId === 'A' ? 'B' : 'A';
