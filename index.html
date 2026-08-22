@@ -3539,7 +3539,7 @@
         '      if (!imgElement) return;',
         '      if (!imgData) { imgElement.style.display = "none"; imgElement.src = ""; return; }',
         '      imgElement.style.display = "block";',
-        '      imgElement.src = typeof imgData === "string" ? imgData : (imgData.src || "");',
+        '      imgElement.src = typeof imgData === "string" ? imgData : (imgData.dataUrl || imgData.src || "");',
         '      const fitMode = imgData.fitMode || "cover";',
         '      imgElement.className = "slide-img " + (fitMode === "fit" ? "fit-contain" : "fit-cover");',
         '      const panX = imgData.panX || 0;',
