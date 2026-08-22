@@ -1352,6 +1352,8 @@
       .polaroid-card { scroll-snap-align: center; }
     }
 
+.slide-img.fit-contain { object-fit: contain !important; }
+    .slide-buffer { display: flex; align-items: center; justify-content: center; }
 </style>
 </head>
 <body class="fx-enabled">
@@ -2766,7 +2768,7 @@
         '    function scheduleNextSlide() { slideshowTimer = setTimeout(triggerNextSlide, (currentConfig.duration || 4.0) * 1000); }',
         '    function triggerNextSlide() { const validImages = currentConfig.images.filter(img => img !== null); if (validImages.length <= 1) return; currentSlideIndex = (currentSlideIndex + 1) % validImages.length; const nextImgData = validImages[currentSlideIndex]; const bufferA = document.getElementById("bufferA"); const bufferB = document.getElementById("bufferB"); const imgBufferA = document.getElementById("imgBufferA"); const imgBufferB = document.getElementById("imgBufferB"); const incomingBuffer = activeBufferId === "A" ? bufferB : bufferA; const incomingImg = activeBufferId === "A" ? imgBufferB : imgBufferA; const outgoingBuffer = activeBufferId === "A" ? bufferA : bufferB; applyImageDataToElement(nextImgData, incomingImg); const transType = currentConfig.transition || "fade"; incomingBuffer.style.setProperty("--anim-speed", (currentConfig.animSpeed || 0.7) + "s"); incomingBuffer.style.setProperty("--slide-easing", currentConfig.easing || "ease-in-out"); incomingBuffer.className = "slide-buffer active-slide trans-" + transType + "-enter"; outgoingBuffer.className = "slide-buffer"; activeBufferId = activeBufferId === "A" ? "B" : "A"; if (currentConfig.theme === "persona-red" && currentConfig.fxEnabled) triggerPersonaTransitionFx(); scheduleNextSlide(); }',
         '    function triggerPersonaTransitionFx() { const slashLayer = document.querySelector(".persona-slash-layer"); if (!slashLayer) return; slashLayer.classList.remove("slash-active"); void slashLayer.offsetWidth; slashLayer.classList.add("slash-active"); setTimeout(() => { slashLayer.classList.remove("slash-active"); }, ((currentConfig.animSpeed || 0.7) * 1000) + 300); }',
-        '    function applyImageDataToElement(imgData, imgElement) { if (!imgData || !imgElement) return; imgElement.src = imgData.dataUrl; imgElement.style.transform = "translate3d(" + (imgData.panX || 0) + "%, " + (imgData.panY || 0) + "%, 0) scale(" + (imgData.scale || 1.0) + ")"; }',
+        '    function applyImageDataToElement(imgData, imgElement) { if (!imgData || !imgElement) return; imgElement.src = imgData.dataUrl; imgElement.style.transform = "translate3d(" + (imgData.panX || 0) + "%, " + (imgData.panY || 0) + "%, 0) scale(" + (imgData.scale || 1.0) + ")"; if (imgData.fitMode === "contain") imgElement.classList.add("fit-contain"); else imgElement.classList.remove("fit-contain"); }',
         '  <' + '/script>',
         '</body>',
         '</html>'
