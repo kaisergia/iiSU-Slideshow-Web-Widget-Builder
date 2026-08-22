@@ -1353,7 +1353,11 @@
     }
 
 .slide-img.fit-contain { object-fit: contain !important; }
-    .slide-buffer { display: flex; align-items: center; justify-content: center; }
+    .slide-buffer { display: flex; align-items: center; justify-content: center; background: var(--bg-dark); }
+    html[data-theme="persona-red"] .slide-buffer { background: #d6001c !important; }
+    html[data-theme="cozy-acnh"] .slide-buffer { background: #e6dac3 !important; }
+    html[data-theme="retro-crt"] .slide-buffer { background: #0a0b10 !important; }
+    html[data-theme="glass-cyber"] .slide-buffer { background: #0b0f19 !important; }
 </style>
 </head>
 <body class="fx-enabled">
