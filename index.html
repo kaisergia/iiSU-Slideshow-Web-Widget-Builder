@@ -2110,6 +2110,25 @@
       }
     }
 
+
+
+    /* STREAMLINED ADJUSTMENT PANEL DIRECTLY BELOW SLOTS */
+    .adjust-photo-row {
+      margin-top: 6px !important;
+      padding: 10px 12px !important;
+      border: 1px solid var(--accent-red, #ff1e42) !important;
+      background: rgba(0, 0, 0, 0.85) !important;
+      border-radius: 6px !important;
+    }
+
+    @media (max-width: 768px) {
+      .adjust-photo-row {
+        width: 100% !important;
+        margin-top: 4px !important;
+        padding: 8px 6px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="fx-enabled">
@@ -2257,7 +2276,7 @@
               </div>
             </div>
 
-            <button type="button" class="btn-action" id="toggleAdjustRowBtn" style="background: rgba(255, 42, 133, 0.2); border-color: var(--neon-pink); color: #ffffff; font-weight: 800;">📷 ADJUST PHOTO</button>
+            <button type="button" class="btn-action" id="toggleAdjustRowBtn" style="display: none !important;" style="background: rgba(255, 42, 133, 0.2); border-color: var(--neon-pink); color: #ffffff; font-weight: 800;">📷 ADJUST PHOTO</button>
             <div style="display: flex; align-items: center; gap: 4px;">
               <span class="control-label">THEME FX:</span>
               <select class="select-input" id="fxToggleSelect">
@@ -2903,6 +2922,28 @@
           else card.classList.remove('active');
         }
       }
+
+      // Display adjustment sliders directly below slots when slot is clicked
+      const adjRow = document.getElementById("adjustPhotoRow");
+      if (adjRow) {
+        adjRow.style.display = "flex";
+      }
+
+      // Update active slot indicator badge
+      const slotBadge = document.getElementById("activeSlotBadge");
+      if (slotBadge) {
+        slotBadge.innerText = "SLOT 0" + (idx + 1) + " ADJUST:";
+      }
+
+      // Sync slider values with active slot
+      const slotData = (currentConfig.images && currentConfig.images[idx]) || {};
+      const panXInput = document.getElementById("panXInput");
+      const panYInput = document.getElementById("panYInput");
+      const zoomInput = document.getElementById("zoomInput");
+
+      if (panXInput) panXInput.value = slotData.panX || 0;
+      if (panYInput) panYInput.value = slotData.panY || 0;
+      if (zoomInput) zoomInput.value = slotData.scale || 1.0;
     }
 
     function applySlotTransform(idx) {
