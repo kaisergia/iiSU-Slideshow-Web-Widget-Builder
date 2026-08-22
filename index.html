@@ -13,7 +13,7 @@
   <style>
 @font-face {
   font-family: 'Earwig Factory';
-  src: url("./assets/earwig_factory.otf") format('opentype');
+  src: url("./assets/fonts/earwig_factory.otf") format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -467,7 +467,7 @@
       display: block !important;
     }
 
-    .p5-lightning-slash { position: absolute; inset: -20%; background: url("./assets/p5_lightning_slash.png") center center / cover no-repeat; pointer-events: none; opacity: 0; transform: scale(0.8) rotate(-15deg); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .p5-lightning-slash { position: absolute; inset: -20%; background: url("./assets/images/persona/p5_lightning_slash.png") center center / cover no-repeat; pointer-events: none; opacity: 0; transform: scale(0.8) rotate(-15deg); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
     .p5-star-actor {
       position: absolute;
@@ -482,7 +482,7 @@
     .p5-star-actor:nth-child(2) { top: 14%; right: 14%; }
     .p5-star-actor:nth-child(3) { bottom: 20%; left: 16%; }
 
-    .persona-slash-layer.slash-active .p5-lightning-slash { position: absolute; inset: -20%; background: url("./assets/p5_lightning_slash.png") center center / cover no-repeat; pointer-events: none; opacity: 0; transform: scale(0.8) rotate(-15deg); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .persona-slash-layer.slash-active .p5-lightning-slash { position: absolute; inset: -20%; background: url("./assets/images/persona/p5_lightning_slash.png") center center / cover no-repeat; pointer-events: none; opacity: 0; transform: scale(0.8) rotate(-15deg); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
     .persona-slash-layer.slash-active .p5-star-actor {
       animation: p5StarBurst var(--anim-speed, 0.7s) cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -1581,7 +1581,7 @@
     
     /* HIGH-PERFORMANCE WEB ASSET LOADING (LIGHTWEIGHT RELATIVE URL) */
     html[data-theme="persona-red"] .widget-container {
-      background: #000000 url("./assets/p5_newBackground.jpg") center center / cover no-repeat !important;
+      background: #000000 url("./assets/images/persona/p5_newBackground.jpg") center center / cover no-repeat !important;
     }
 
 
@@ -2122,8 +2122,8 @@
         <!-- PERSONA 5 PHANTOM SLASH & STAR OVERLAY -->
         <div class="persona-slash-layer">
           <div class="p5-lightning-slash"></div>
-          <img class="p5-star-actor" src="./assets/p5_star_actor.png" alt="Star" />
-          <img class="p5-star-actor" src="./assets/p5_star_actor.png" alt="Star" />
+          <img class="p5-star-actor" src="./assets/images/persona/p5_star_actor.png" alt="Star" />
+          <img class="p5-star-actor" src="./assets/images/persona/p5_star_actor.png" alt="Star" />
         </div>
 
         <!-- ANIMAL CROSSING FLOATING LEAVES LAYER -->
@@ -2156,16 +2156,16 @@
   </div>
 
   <script>
-    const PERSONA_BUILDING_ICON_B64 = "./assets/persona_building_icon.png";
-    const LEAF_B64 = "./assets/acnh_leaf.png";
+    const PERSONA_BUILDING_ICON_B64 = "./assets/images/persona/persona_building_icon.png";
+    const LEAF_B64 = "./assets/images/acnh/acnh_leaf.png";
 
     // Clean Visitor NPC Pool
     function getNPCPool() {
       return [
-        { name: "KK Slider", src: "./assets/npc_kk_slider.gif" },
-        { name: "Sable", src: "./assets/npc_sable.gif" },
-        { name: "Isabelle", src: "./assets/npc_isabelle.gif" },
-        { name: "Mr. Resetti", src: "./assets/npc_mr_resetti.gif" }
+        { name: "KK Slider", src: "./assets/images/acnh/npc_kk_slider.gif" },
+        { name: "Sable", src: "./assets/images/acnh/npc_sable.gif" },
+        { name: "Isabelle", src: "./assets/images/acnh/npc_isabelle.gif" },
+        { name: "Mr. Resetti", src: "./assets/images/acnh/npc_mr_resetti.gif" }
       ];
     }
 
@@ -3252,7 +3252,7 @@
         '        <div class="slide-buffer active-slide" id="bufferA"><img class="slide-img" id="imgBufferA" alt="Slideshow Image A" /></div>',
         '        <div class="slide-buffer" id="bufferB"><img class="slide-img" id="imgBufferB" alt="Slideshow Image B" /></div>',
         '        <div class="cyber-glitch-layer"><div class="glitch-slice"></div><div class="glitch-slice"></div><div class="glitch-slice"></div></div>',
-        '        <div class="persona-slash-layer"><div class="p5-lightning-slash"></div><img class="p5-star-actor" src="./assets/p5_star_actor.png" alt="Star" /><img class="p5-star-actor" src="./assets/p5_star_actor.png" alt="Star" /></div>',
+        '        <div class="persona-slash-layer"><div class="p5-lightning-slash"></div><img class="p5-star-actor" src="./assets/images/persona/p5_star_actor.png" alt="Star" /><img class="p5-star-actor" src="./assets/images/persona/p5_star_actor.png" alt="Star" /></div>',
         '        <div class="acnh-leaves-layer" id="acnhLeavesLayer"><img class="falling-acnh-leaf" style="left: 12%; animation-delay: 0s;" alt="Leaf" /><img class="falling-acnh-leaf" style="left: 48%; animation-delay: 2.2s;" alt="Leaf" /><img class="falling-acnh-leaf" style="left: 80%; animation-delay: 4.2s;" alt="Leaf" /></div>',
         '        <div class="acnh-npc-layer" id="acnhNpcLayer"><img id="npcActor" class="npc-actor" alt="ACNH Visitor NPC" /></div>',
         '        <div class="crt-vhs-layer"><div class="vhs-line"></div></div>',
@@ -3263,7 +3263,7 @@
         '  <' + 'script>',
         '    const LEAF_B64 = "' + LEAF_B64 + '";',
         '    const currentConfig = ' + jsonStr + ';',
-        '    function getNPCPool() { return [ { name: "KK Slider", src: "./assets/npc_kk_slider.gif" }, { name: "Sable", src: "./assets/npc_sable.gif" }, { name: "Isabelle", src: "./assets/npc_isabelle.gif" }, { name: "Mr. Resetti", src: "./assets/npc_mr_resetti.gif" } ]; }',
+        '    function getNPCPool() { return [ { name: "KK Slider", src: "./assets/images/acnh/npc_kk_slider.gif" }, { name: "Sable", src: "./assets/images/acnh/npc_sable.gif" }, { name: "Isabelle", src: "./assets/images/acnh/npc_isabelle.gif" }, { name: "Mr. Resetti", src: "./assets/images/acnh/npc_mr_resetti.gif" } ]; }',
         '    let npcDeck = [], lastNpcName = "", isNpcActive = false, npcTimer = null;',
         '    function shuffleDeck(arr) { const newArr = [...arr]; for (let i = newArr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [newArr[i], newArr[j]] = [newArr[j], newArr[i]]; } return newArr; }',
         '    function getNextNpc() { try { const pool = getNPCPool(); if (!pool || pool.length === 0) return null; if (npcDeck.length === 0) { let newDeck = shuffleDeck(pool); if (lastNpcName && newDeck.length > 1 && newDeck[0].name === lastNpcName) { [newDeck[0], newDeck[1]] = [newDeck[1], newDeck[0]]; } npcDeck = newDeck; } const picked = npcDeck.pop(); lastNpcName = picked.name; return picked; } catch (e) { return null; } }',
