@@ -1814,6 +1814,41 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes dropdownSlideUp {
+      0% { opacity: 0; transform: translateY(6px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ON PC / DESKTOP VIEW: OPEN UPWARD (DROP-UP) SO NEVER CUT OFF BY SCREEN BOTTOM */
+    @media (min-width: 769px) {
+      .custom-dropdown-menu,
+      .custom-dropdown.drop-up .custom-dropdown-menu {
+        top: auto !important;
+        bottom: calc(100% + 6px) !important;
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.75), 0 0 12px rgba(0, 240, 255, 0.25) !important;
+      }
+
+      .custom-dropdown.open .custom-dropdown-menu,
+      .custom-dropdown.open.drop-up .custom-dropdown-menu {
+        animation: dropdownSlideUp 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+      }
+
+      .custom-dropdown.open .dropdown-arrow {
+        transform: rotate(0deg) !important;
+      }
+      .custom-dropdown .dropdown-arrow {
+        transform: rotate(180deg);
+      }
+
+      html[data-theme="persona-red"] .custom-dropdown-menu {
+        box-shadow: 0 0 20px rgba(255, 30, 66, 0.6), -4px -4px 0px #ffd700 !important;
+      }
+
+      html[data-theme="cozy-acnh"] .custom-dropdown-menu {
+        box-shadow: 0 -6px 18px rgba(85, 52, 22, 0.3) !important;
+      }
+    }
+
     .custom-dropdown-option {
       display: flex;
       align-items: center;
@@ -3078,6 +3113,18 @@
           document.querySelectorAll('.custom-dropdown').forEach(d => {
             if (d !== dropdown) d.classList.remove('open');
           });
+          
+          // Smart positioning check
+          if (!dropdown.classList.contains('open')) {
+            const rect = trigger.getBoundingClientRect();
+            const spaceBelow = window.innerHeight - rect.bottom;
+            if (spaceBelow < 220 || window.innerWidth > 768) {
+              dropdown.classList.add('drop-up');
+            } else {
+              dropdown.classList.remove('drop-up');
+            }
+          }
+          
           dropdown.classList.toggle('open');
         });
       }
