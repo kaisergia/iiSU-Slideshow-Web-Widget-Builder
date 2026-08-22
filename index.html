@@ -315,7 +315,8 @@
     }
 
     /* PLAYER MODE */
-    .player-viewport {
+    .player-viewport,
+    .slideshow-frame {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -2664,7 +2665,7 @@
     }
 
     function triggerNextSlide() {
-      const validImages = currentConfig.images.filter(img => img !== null);
+      const validImages = currentConfig.images.filter(img => img !== null && img !== '');
       if (validImages.length <= 1) return;
 
       currentSlideIndex = (currentSlideIndex + 1) % validImages.length;
