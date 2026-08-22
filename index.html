@@ -2893,87 +2893,62 @@
     // Setup 5 Polaroid Cards Interaction
     function setupSlotInteractions() {
       for (let i = 0; i < 5; i++) {
-        const idx = i;
-        const card = document.getElementById('slotCard' + idx);
-        const fileInput = document.getElementById('fileInput' + idx);
-        const removeBtn = document.getElementById('removeBtn' + idx);
+        const slotCard = document.getElementById('slotCard' + i);
+        const fileInput = document.getElementById('fileInput' + i);
+        const removeBtn = document.getElementById('removeBtn' + i);
 
-        if (!card || !fileInput) continue;
+        if (slotCard) {
+          slotCard.addEventListener('click', (e) => {
+            if (e.target.closest('.polaroid-remove-btn')) return;
+            selectSlot(i);
+            // If card has no image, trigger file upload picker
+            if (!currentConfig.images[i]) {
+              const fi = document.getElementById('fileInput' + i);
+              if (fi) fi.click();
+            }
+          });
+        }
 
-        card.addEventListener('click', (e) => {
-          if (removeBtn && (e.target === removeBtn || removeBtn.contains(e.target))) return;
-          selectSlot(idx);
-        });
-
-        fileInput.addEventListener('change', (e) => {
-          if (e.target.files && e.target.files[0]) {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-            reader.onload = (evt) => {
-              currentConfig.images[idx] = {
-                dataUrl: evt.target.result,
-                panX: 0,
-                panY: 0,
-                scale: 1.0
+        if (fileInput) {
+          fileInput.addEventListener('change', (e) => {
+            const file = e.target.files && e.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (evt) => {
+                const b64 = evt.target.result;
+                currentConfig.images[i] = {
+                  dataUrl: b64,
+                  panX: 0,
+                  panY: 0,
+                  scale: 1.0,
+                  fitMode: 'cover'
+                };
+                const img = document.getElementById('img' + i);
+                if (img) img.src = b64;
+                if (slotCard) slotCard.classList.add('has-image');
+                selectSlot(i);
+                autoSaveConfigInRealTime();
               };
-              populateConfigUI();
-              selectSlot(idx);
-              autoSaveConfigInRealTime();
-            };
-            reader.readAsDataURL(file);
-          }
-        });
-
-        
-        // Intuitive Mouse / Touch Drag Panning on Uploaded Photos
-        let isDragPanning = false;
-        let dragStartX = 0, dragStartY = 0;
-        let startPanX = 0, startPanY = 0;
-
-        const imgWrap = document.getElementById('imgWrap' + idx);
-        if (imgWrap) {
-          imgWrap.addEventListener('pointerdown', (e) => {
-            const slotData = currentConfig.images[idx];
-            if (!slotData) return;
-            isDragPanning = true;
-            dragStartX = e.clientX;
-            dragStartY = e.clientY;
-            startPanX = slotData.panX || 0;
-            startPanY = slotData.panY || 0;
-            imgWrap.setPointerCapture(e.pointerId);
-            e.stopPropagation();
+              reader.readAsDataURL(file);
+            }
+            e.target.value = '';
           });
-
-          imgWrap.addEventListener('pointermove', (e) => {
-            if (!isDragPanning) return;
-            const slotData = currentConfig.images[idx];
-            if (!slotData) return;
-            const dx = e.clientX - dragStartX;
-            const dy = e.clientY - dragStartY;
-            slotData.panX = Math.max(-100, Math.min(100, startPanX + (dx / 2)));
-            slotData.panY = Math.max(-100, Math.min(100, startPanY + (dy / 2)));
-            applySlotTransform(idx);
-            selectSlot(idx);
-          });
-
-          imgWrap.addEventListener('pointerup', () => { isDragPanning = false; });
-          imgWrap.addEventListener('pointercancel', () => { isDragPanning = false; });
         }
 
         if (removeBtn) {
           removeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            currentConfig.images[idx] = null;
-            fileInput.value = '';
-            populateConfigUI();
+            e.preventDefault(); e.stopPropagation();
+            currentConfig.images[i] = null;
+            const img = document.getElementById('img' + i);
+            if (img) img.removeAttribute('src');
+            if (slotCard) slotCard.classList.remove('has-image');
+            selectSlot(i);
             autoSaveConfigInRealTime();
           });
         }
       }
     }
 
-    // Dedicated Pan & Zoom Control Sliders
     function setupPanZoomControls() {
       const panXSlider = document.getElementById('panXSlider');
       const panYSlider = document.getElementById('panYSlider');
