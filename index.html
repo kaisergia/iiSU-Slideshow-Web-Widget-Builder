@@ -2019,17 +2019,24 @@
           <div class="config-header-actions">
             <button type="button" class="btn-action" id="loadJsonBtn">📂 Load Draft</button>
             <button type="button" class="btn-action" id="saveJsonBtn">💾 Save Draft</button>
+            <button type="button" class="btn-action btn-save" id="playSlideshowBtn" style="background: var(--neon-gold, #ffc926) !important; color: #000000 !important; font-weight: 900 !important; border-color: var(--neon-gold, #ffc926) !important; cursor: pointer !important;">▶️ PLAY SLIDESHOW</button>
             <button type="button" class="btn-action btn-export" id="exportWidgetBtn">📦 EXPORT WIDGET (.html)</button>
           </div>
         </div>
 
         <!-- 5 RETRO POLAROID SLEEVES SIDE-BY-SIDE IN CENTER ROW -->
         <div class="polaroid-row" id="polaroidRow">
-          
+          <!-- Hidden Off-Screen File Inputs Container (Completely Removed From Cards) -->
+          <div style="display: none !important; position: absolute; visibility: hidden; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+            <input type="file" id="fileInput0" accept="image/*" />
+            <input type="file" id="fileInput1" accept="image/*" />
+            <input type="file" id="fileInput2" accept="image/*" />
+            <input type="file" id="fileInput3" accept="image/*" />
+            <input type="file" id="fileInput4" accept="image/*" />
+          </div>
+
           <!-- Slot 1 -->
           <div class="polaroid-card active" data-slot="0" id="slotCard0" style="--slot-idx: 0;">
-            <input type="file" id="fileInput0" accept="image/*" class="native-hidden-file-input" title="Upload Photo to SLOT 01" />
-            <label for="fileInput0" class="card-click-label-overlay" id="clickOverlay0" title="Upload Photo"></label>
             <div class="polaroid-tape"></div>
             <div class="polaroid-photo-frame">
               <div class="polaroid-empty-prompt">
@@ -2048,8 +2055,6 @@
 
           <!-- Slot 2 -->
           <div class="polaroid-card" data-slot="1" id="slotCard1" style="--slot-idx: 1;">
-            <input type="file" id="fileInput1" accept="image/*" class="native-hidden-file-input" title="Upload Photo to SLOT 02" />
-            <label for="fileInput1" class="card-click-label-overlay" id="clickOverlay1" title="Upload Photo"></label>
             <div class="polaroid-tape"></div>
             <div class="polaroid-photo-frame">
               <div class="polaroid-empty-prompt">
@@ -2068,8 +2073,6 @@
 
           <!-- Slot 3 -->
           <div class="polaroid-card" data-slot="2" id="slotCard2" style="--slot-idx: 2;">
-            <input type="file" id="fileInput2" accept="image/*" class="native-hidden-file-input" title="Upload Photo to SLOT 03" />
-            <label for="fileInput2" class="card-click-label-overlay" id="clickOverlay2" title="Upload Photo"></label>
             <div class="polaroid-tape"></div>
             <div class="polaroid-photo-frame">
               <div class="polaroid-empty-prompt">
@@ -2088,8 +2091,6 @@
 
           <!-- Slot 4 -->
           <div class="polaroid-card" data-slot="3" id="slotCard3" style="--slot-idx: 3;">
-            <input type="file" id="fileInput3" accept="image/*" class="native-hidden-file-input" title="Upload Photo to SLOT 04" />
-            <label for="fileInput3" class="card-click-label-overlay" id="clickOverlay3" title="Upload Photo"></label>
             <div class="polaroid-tape"></div>
             <div class="polaroid-photo-frame">
               <div class="polaroid-empty-prompt">
@@ -2108,8 +2109,6 @@
 
           <!-- Slot 5 -->
           <div class="polaroid-card" data-slot="4" id="slotCard4" style="--slot-idx: 4;">
-            <input type="file" id="fileInput4" accept="image/*" class="native-hidden-file-input" title="Upload Photo to SLOT 05" />
-            <label for="fileInput4" class="card-click-label-overlay" id="clickOverlay4" title="Upload Photo"></label>
             <div class="polaroid-tape"></div>
             <div class="polaroid-photo-frame">
               <div class="polaroid-empty-prompt">
@@ -2901,7 +2900,7 @@
           slotCard.addEventListener('click', (e) => {
             if (e.target.closest('.polaroid-remove-btn')) return;
             selectSlot(i);
-            // If card has no image, trigger file upload picker
+            // If empty slot, trigger file upload dialog
             if (!currentConfig.images[i]) {
               const fi = document.getElementById('fileInput' + i);
               if (fi) fi.click();
