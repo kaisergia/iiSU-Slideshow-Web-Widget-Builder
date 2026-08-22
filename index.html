@@ -2528,7 +2528,7 @@
       }, 4000);
     }
 
-    function scheduleNpcPopIns() {
+        function scheduleNpcPopIns() {
       if (npcTimer) clearInterval(npcTimer);
       if (currentConfig.theme !== 'cozy-acnh' || !currentConfig.fxEnabled) return;
       npcTimer = setInterval(() => {
@@ -2546,6 +2546,52 @@
         actor.classList.remove('pop-in');
         actor.classList.remove('popin-show');
         isNpcActive = false;
+      }
+    }
+
+    const THEME_FX_NAMES = {
+      'retro-crt': '⚡ ON (CRT VHS Tracking Line)',
+      'cozy-acnh': '⚡ ON (Island Leaves & Visitor NPCs)',
+      'persona-red': '⚡ ON (Phantom Halftone & Slash)',
+      'glass-cyber': '⚡ ON (Cyberpunk Relic Glitch)'
+    };
+
+    function applyTheme(themeName) {
+      currentConfig.theme = themeName || 'retro-crt';
+      document.documentElement.setAttribute('data-theme', currentConfig.theme);
+      
+      const themeSelect = document.getElementById('themeSelect');
+      if (themeSelect) themeSelect.value = currentConfig.theme;
+
+      const themeBoxIcon = document.getElementById('themeBoxIcon');
+      if (themeBoxIcon) {
+        if (currentConfig.theme === 'persona-red') {
+          themeBoxIcon.innerHTML = '<img src="' + PERSONA_BUILDING_ICON_B64 + '" alt="Persona Building" />';
+        } else if (currentConfig.theme === 'cozy-acnh') {
+          themeBoxIcon.textContent = '🍃';
+        } else if (currentConfig.theme === 'glass-cyber') {
+          themeBoxIcon.textContent = '✨';
+        } else {
+          themeBoxIcon.textContent = '📺';
+        }
+      }
+
+      const fxOptionOn = document.getElementById('fxOptionOn');
+      if (fxOptionOn) {
+        fxOptionOn.textContent = THEME_FX_NAMES[currentConfig.theme] || '⚡ ON (Theme FX)';
+      }
+    }
+
+    function applyFxState(enabled) {
+      currentConfig.fxEnabled = (enabled !== false);
+      const fxToggleSelect = document.getElementById('fxToggleSelect');
+
+      if (currentConfig.fxEnabled) {
+        document.body.classList.add('fx-enabled');
+        if (fxToggleSelect) fxToggleSelect.value = 'on';
+      } else {
+        document.body.classList.remove('fx-enabled');
+        if (fxToggleSelect) fxToggleSelect.value = 'off';
       }
     }
 
