@@ -2016,6 +2016,100 @@
       }
     }
 
+
+
+    /* =========================================================================
+       PERFECT MOBILE ZERO-COVERAGE LAYOUT (CLEAR VISIBILITY FOR SLOTS & ADJUST)
+       ========================================================================= */
+    @media (max-width: 768px) {
+      .widget-container {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 4px 4px 50px 4px !important;
+      }
+
+      .mode-panel.active {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 10px !important;
+      }
+
+      /* Compact Top Header */
+      .config-header {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        z-index: 100 !important;
+        margin: 0 0 4px 0 !important;
+        padding: 6px 4px !important;
+        gap: 6px !important;
+        background: rgba(0, 0, 0, 0.95) !important;
+        border-bottom: 2px solid #ff1e42 !important;
+        flex-shrink: 0 !important;
+      }
+
+      .config-title {
+        font-size: clamp(13px, 4cqmin, 16px) !important;
+        text-align: center !important;
+        padding: 3px 6px !important;
+        margin: 0 !important;
+      }
+
+      .header-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 4px !important;
+        width: 100% !important;
+      }
+
+      .header-actions .btn-action {
+        flex: 1 !important;
+        min-height: 42px !important;
+        font-size: clamp(10px, 3cqmin, 12px) !important;
+        padding: 4px 4px !important;
+        justify-content: center !important;
+        align-items: center !important;
+        display: flex !important;
+      }
+
+      /* Polaroid Cards Carousel - FULLY VISIBLE BELOW HEADER */
+      .polaroid-row {
+        position: static !important;
+        display: flex !important;
+        grid-template-columns: none !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        padding: 12px 6px !important;
+        margin: 4px 0 8px 0 !important;
+        gap: 12px !important;
+        -webkit-overflow-scrolling: touch !important;
+        flex-shrink: 0 !important;
+      }
+
+      .polaroid-card {
+        flex: 0 0 135px !important;
+        width: 135px !important;
+        height: 202px !important;
+        aspect-ratio: 2 / 3 !important;
+        scroll-snap-align: center !important;
+        position: relative !important;
+      }
+
+      /* Control Panels Below Cards */
+      .controls-row {
+        position: static !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding: 8px 6px !important;
+        margin-top: 4px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="fx-enabled">
