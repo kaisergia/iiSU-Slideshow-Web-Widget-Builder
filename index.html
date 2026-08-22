@@ -1402,495 +1402,12 @@
 
 
 
-    /* DYNAMIC MOBILE RESPONSIVE MEDIA QUERIES */
-    @media (max-width: 768px) {
-      .config-header { padding: 4px 6px; }
-      .config-title { font-size: clamp(12px, 4cqmin, 18px); }
-      .btn-action { padding: clamp(2px, 0.6cqh, 4px) clamp(4px, 1.5cqmin, 8px); font-size: clamp(8px, 2.5cqmin, 11px); }
-      .controls-row { flex-wrap: wrap; gap: clamp(2px, 0.8cqmin, 4px); }
-      .transition-swatches { max-width: 100%; overflow-x: auto; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
-    }
-
-    @media (max-width: 600px) and (orientation: portrait) {
-      .widget-container { aspect-ratio: auto !important; height: 100vh !important; width: 100vw !important; border-radius: 0 !important; border: none !important; }
-      .polaroid-row { grid-template-columns: repeat(5, minmax(65px, 1fr)) !important; overflow-x: auto !important; scroll-snap-type: x mandatory !important; padding-bottom: 4px !important; -webkit-overflow-scrolling: touch; }
-      .polaroid-card { scroll-snap-align: center; }
-    }
-
-.slide-img.fit-contain { object-fit: contain !important; }
+        .slide-img.fit-contain { object-fit: contain !important; }
     .slide-buffer { display: flex; align-items: center; justify-content: center; background: #000000; }
-    
-    
-    
-    
-
-
-    
-    
-    /* AUTHENTIC PERSONA 5 ANGLED BADGE UI & HIGH-LEGIBILITY TYPOGRAPHY */
-    html[data-theme="persona-red"] {
-      --font-title: 'Permanent Marker', 'Bebas Neue', cursive, sans-serif;
-      --font-body: 'Bebas Neue', 'Permanent Marker', sans-serif;
-    }
-
-    /* Persona 5 Header: Angled Red/Black Banner with Bold Permanent Marker Text */
-    html[data-theme="persona-red"] .config-title {
-      font-family: 'Permanent Marker', cursive, sans-serif !important;
-      font-size: clamp(16px, 5cqmin, 24px) !important;
-      letter-spacing: 1.5px !important;
-      text-transform: uppercase !important;
-      color: #ffffff !important;
-      background: #000000 !important;
-      border-left: 5px solid #ff1e42 !important;
-      padding: 4px 14px !important;
-      transform: skewX(-10deg) !important;
-      box-shadow: -4px 4px 0px #ff1e42 !important;
-      display: inline-block !important;
-    }
-
-    /* Control Labels: Persona 5 Angled Black Badges with White/Yellow Text */
-    html[data-theme="persona-red"] .control-label {
-      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
-      font-size: clamp(14px, 4cqmin, 18px) !important;
-      letter-spacing: 1.5px !important;
-      font-weight: 800 !important;
-      color: #fffb00 !important;
-      background: #000000 !important;
-      border: 1px solid #ff1e42 !important;
-      padding: 2px 8px !important;
-      transform: skewX(-8deg) !important;
-      box-shadow: -2px 2px 0px #ff1e42 !important;
-      text-transform: uppercase !important;
-    }
-
-    /* Buttons & Action Badges: Persona 5 Dynamic Tilted Action Cards */
-    html[data-theme="persona-red"] .btn-action,
-    html[data-theme="persona-red"] .gamepad-hud-btn,
-    html[data-theme="persona-red"] .modal-title {
-      font-family: 'Permanent Marker', cursive, sans-serif !important;
-      letter-spacing: 1.5px !important;
-      text-transform: uppercase !important;
-      transform: skewX(-8deg) !important;
-    }
-
-    /* Transition Chips & Select Inputs: P5 Sharp Angled Badges */
-    html[data-theme="persona-red"] .trans-chip {
-      font-family: 'Bebas Neue', sans-serif !important;
-      font-size: clamp(13px, 3.8cqmin, 16px) !important;
-      letter-spacing: 1.5px !important;
-      font-weight: 800 !important;
-      transform: skewX(-6deg) !important;
-    }
-
-    html[data-theme="persona-red"] .select-input {
-      font-family: 'Bebas Neue', sans-serif !important;
-      font-size: clamp(13px, 3.8cqmin, 16px) !important;
-      letter-spacing: 1.2px !important;
-      font-weight: 800 !important;
-      background: #000000 !important;
-      color: #ffffff !important;
-      border: 1.5px solid #ff1e42 !important;
-      transform: skewX(-6deg) !important;
-    }
-
-    /* Polaroid Card Captions: P5 Black Badge Overlay */
-    html[data-theme="persona-red"] .polaroid-caption {
-      font-family: 'Permanent Marker', cursive, sans-serif !important;
-      font-size: clamp(14px, 4cqmin, 18px) !important;
-      letter-spacing: 1.5px !important;
-      color: #ffffff !important;
-      text-transform: uppercase !important;
-      background: #000000 !important;
-      padding: 2px 10px !important;
-      transform: skewX(-6deg) rotate(-2deg) !important;
-      border-bottom: 2px solid #ff1e42 !important;
-    }
-
-    html[data-theme="persona-red"] .modal-message,
-    html[data-theme="persona-red"] .modal-btn {
-      font-family: 'Permanent Marker', cursive, sans-serif !important;
-      letter-spacing: 1.5px !important;
-    }
-
-
 
     /* =========================================================================
-       CLEAN 2x3 POLAROID SLOT LAYOUT & STRICT THEME ISOLATION (ZERO BLEEDING)
+       1. PC / DESKTOP VIEW (100% UNTOUCHED - FULLSCREEN EDGE-TO-EDGE)
        ========================================================================= */
-    .polaroid-row {
-      display: grid !important;
-      grid-template-columns: repeat(5, 1fr) !important;
-      gap: clamp(8px, 2.2cqmin, 18px) !important;
-      padding: clamp(8px, 2.5cqmin, 16px) clamp(10px, 3cqmin, 20px) !important;
-      align-items: center !important;
-      justify-content: center !important;
-      max-width: 100% !important;
-    }
-
-    .polaroid-card {
-      aspect-ratio: 2 / 3 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      position: relative !important;
-      width: 100% !important;
-      max-height: 100% !important;
-    }
-
-    .polaroid-photo-frame {
-      aspect-ratio: 2 / 3 !important;
-      flex: 1 !important;
-      width: 100% !important;
-      position: relative !important;
-      overflow: hidden !important;
-    }
-
-    /* PERSONA PHANTOM THEME - CLEAN ANGLED BADGES (100% LEGIBLE & UNCLUTTERED) */
-    html[data-theme="persona-red"] .config-header {
-      background: #000000 !important;
-      border-bottom: 3px solid #ff1e42 !important;
-      padding: 6px 14px !important;
-    }
-
-    html[data-theme="persona-red"] .config-title {
-      font-family: 'Permanent Marker', cursive, sans-serif !important;
-      font-size: clamp(16px, 4.8cqmin, 24px) !important;
-      letter-spacing: 1.5px !important;
-      color: #ffffff !important;
-      background: #000000 !important;
-      border-left: 5px solid #ff1e42 !important;
-      padding: 3px 12px !important;
-      transform: skewX(-8deg) !important;
-      box-shadow: -4px 4px 0px #ff1e42 !important;
-    }
-
-    html[data-theme="persona-red"] .control-label {
-      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
-      font-size: clamp(13px, 3.8cqmin, 17px) !important;
-      letter-spacing: 1.5px !important;
-      font-weight: 800 !important;
-      color: #fffb00 !important;
-      background: #000000 !important;
-      border: 1px solid #ff1e42 !important;
-      padding: 2px 8px !important;
-      transform: skewX(-6deg) !important;
-    }
-
-    html[data-theme="persona-red"] .btn-action {
-      font-family: 'Bebas Neue', 'Permanent Marker', sans-serif !important;
-      font-size: clamp(12px, 3.5cqmin, 15px) !important;
-      letter-spacing: 1.2px !important;
-      font-weight: 800 !important;
-      transform: skewX(-6deg) !important;
-    }
-
-    html[data-theme="persona-red"] .polaroid-caption {
-      font-family: 'Permanent Marker', cursive, sans-serif !important;
-      font-size: clamp(12px, 3.5cqmin, 15px) !important;
-      letter-spacing: 1.2px !important;
-      color: #ffffff !important;
-      background: #000000 !important;
-      padding: 2px 6px !important;
-      transform: skewX(-6deg) !important;
-    }
-
-
-
-    
-    /* HIGH-PERFORMANCE WEB ASSET LOADING (LIGHTWEIGHT RELATIVE URL) */
-    html[data-theme="persona-red"] .widget-container {
-      background: #000000 url("./assets/images/persona/p5_newBackground.jpg") center center / cover no-repeat !important;
-    }
-
-
-
-
-    
-    /* PERSONA PHANTOM GAMEPAD FOCUS & STUCK HOVER SEPARATION FIX */
-    html[data-theme="persona-red"] .polaroid-card {
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, border-color 0.2s ease !important;
-    }
-
-    /* Active selection indicator without sticking in popped-out transform state */
-    html[data-theme="persona-red"] .polaroid-card.active {
-      border: 2px solid #ff1e42 !important;
-      box-shadow: 0 0 12px rgba(255, 30, 66, 0.7) !important;
-    }
-
-    /* Dynamic Pop-Out & Cyan Glow ONLY on Hover or Gamepad Focus */
-    html[data-theme="persona-red"] .polaroid-card:hover,
-    html[data-theme="persona-red"] .polaroid-card.gamepad-focus {
-      transform: translateY(-8px) scale(1.05) rotate(-1.5deg) !important;
-      box-shadow: 5px 5px 0px #00f0ff, 0 0 25px rgba(0, 240, 255, 0.85) !important;
-      border: 2px solid #00f0ff !important;
-      z-index: 15 !important;
-    }
-
-    /* Gamepad Focus for Buttons, Select Inputs, and Swatches */
-    html[data-theme="persona-red"] .btn-action.gamepad-focus,
-    html[data-theme="persona-red"] .btn-action:hover {
-      background: #ffffff !important;
-      color: #000000 !important;
-      border-color: #00f0ff !important;
-      transform: skewX(-8deg) scale(1.08) translateX(4px) !important;
-      box-shadow: 4px 4px 0px #00f0ff !important;
-      outline: none !important;
-    }
-
-    html[data-theme="persona-red"] .trans-chip.gamepad-focus,
-    html[data-theme="persona-red"] .trans-chip:hover {
-      background: #ffffff !important;
-      color: #000000 !important;
-      border-color: #00f0ff !important;
-      transform: skewX(-8deg) scale(1.08) !important;
-      box-shadow: 3px 3px 0px #00f0ff !important;
-      outline: none !important;
-    }
-
-    html[data-theme="persona-red"] .select-input.gamepad-focus,
-    html[data-theme="persona-red"] .select-input:hover,
-    html[data-theme="persona-red"] .select-input:focus {
-      background: #ffffff !important;
-      color: #000000 !important;
-      border-color: #00f0ff !important;
-      box-shadow: 3px 3px 0px #00f0ff !important;
-      outline: none !important;
-    }
-
-
-
-    /* HANDWRITTEN SHARPIE MARKER POLAROID SLOT CAPTIONS (NO BLACK BADGES) */
-    .polaroid-caption,
-    html[data-theme="persona-red"] .polaroid-caption,
-    html[data-theme="cozy-acnh"] .polaroid-caption,
-    html[data-theme="retro-crt"] .polaroid-caption,
-    html[data-theme="glass-cyber"] .polaroid-caption {
-      font-family: 'Permanent Marker', cursive, sans-serif !important;
-      font-size: clamp(12px, 3.5cqmin, 16px) !important;
-      color: #1a1a1a !important;
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-      transform: none !important;
-      text-align: center !important;
-      letter-spacing: 1.5px !important;
-      margin-top: clamp(2px, 0.8cqmin, 5px) !important;
-      text-shadow: none !important;
-      filter: none !important;
-    }
-
-
-
-    /* =========================================================================
-       HIGH-PERFORMANCE MOBILE RESPONSIVE LAYOUT (SMARTPHONES & TABLETS)
-       ========================================================================= */
-    @media (max-width: 768px) {
-      .widget-container {
-        padding: 4px !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      /* Compact Mobile Header */
-      .config-header {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 6px !important;
-        padding: 4px 6px !important;
-      }
-
-      .config-title {
-        font-size: clamp(14px, 4.5cqmin, 18px) !important;
-        text-align: center !important;
-        padding: 4px 8px !important;
-      }
-
-      .config-header-actions {
-        display: flex !important;
-        justify-content: center !important;
-        gap: 4px !important;
-        width: 100% !important;
-      }
-
-      .config-header-actions .btn-action {
-        flex: 1 !important;
-        padding: 4px 6px !important;
-        font-size: clamp(10px, 3cqmin, 12px) !important;
-        text-align: center !important;
-        justify-content: center !important;
-      }
-
-      /* Touch Carousel Polaroid Cards Row */
-      .polaroid-row {
-        display: flex !important;
-        grid-template-columns: none !important;
-        overflow-x: auto !important;
-        scroll-snap-type: x mandatory !important;
-        padding: 8px 4px !important;
-        gap: 10px !important;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .polaroid-card {
-        flex: 0 0 135px !important;
-        width: 135px !important;
-        height: 202px !important;
-        aspect-ratio: 2 / 3 !important;
-        scroll-snap-align: center !important;
-      }
-
-      /* Compact Mobile Controls Panel */
-      .controls-row {
-        flex-wrap: wrap !important;
-        gap: 6px !important;
-        padding: 6px 8px !important;
-      }
-
-      .control-label {
-        font-size: clamp(11px, 3.2cqmin, 14px) !important;
-        padding: 2px 6px !important;
-      }
-
-      .select-input, .trans-chip, .btn-action {
-        font-size: clamp(10px, 3cqmin, 12px) !important;
-        padding: 3px 6px !important;
-      }
-
-      .slider-wrap {
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 6px !important;
-      }
-
-      .range-input {
-        flex: 1 !important;
-      }
-
-      /* Hide Gamepad Bar completely */
-      .gamepad-hud-bar, .p5-bottom-command-wrap {
-        display: none !important;
-      }
-    }
-
-
-
-    /* PERFECT MOBILE VERTICAL TOUCH SCROLLING & TOUCH HIT TARGET FIXES */
-    @media (max-width: 768px) {
-      html, body {
-        height: auto !important;
-        min-height: 100% !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-      }
-
-      .widget-container {
-        height: auto !important;
-        min-height: 100vh !important;
-        aspect-ratio: auto !important;
-        overflow-y: visible !important;
-        padding: 8px 6px 40px 6px !important;
-      }
-
-      .mode-panel.active {
-        height: auto !important;
-        min-height: 100% !important;
-        overflow: visible !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-      }
-
-      .config-header {
-        position: relative !important;
-        z-index: 100 !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 8px !important;
-        padding: 8px 4px !important;
-        margin-top: 4px !important;
-      }
-
-      .config-title {
-        font-size: clamp(15px, 4.8cqmin, 20px) !important;
-        text-align: center !important;
-        padding: 6px 10px !important;
-        margin: 0 !important;
-      }
-
-      .config-header-actions {
-        display: flex !important;
-        gap: 6px !important;
-        width: 100% !important;
-        z-index: 100 !important;
-      }
-
-      .config-header-actions .btn-action {
-        flex: 1 !important;
-        min-height: 44px !important;
-        font-size: clamp(11px, 3.2cqmin, 13px) !important;
-        text-align: center !important;
-        justify-content: center !important;
-        align-items: center !important;
-        display: flex !important;
-        pointer-events: auto !important;
-        cursor: pointer !important;
-        touch-action: manipulation !important;
-      }
-
-      .polaroid-row {
-        display: flex !important;
-        grid-template-columns: none !important;
-        overflow-x: auto !important;
-        scroll-snap-type: x mandatory !important;
-        padding: 10px 4px !important;
-        gap: 12px !important;
-        -webkit-overflow-scrolling: touch !important;
-      }
-
-      .polaroid-card {
-        flex: 0 0 140px !important;
-        width: 140px !important;
-        height: 210px !important;
-        aspect-ratio: 2 / 3 !important;
-        scroll-snap-align: center !important;
-      }
-
-      .controls-row {
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-        padding: 10px 8px !important;
-      }
-
-      .control-label {
-        font-size: clamp(12px, 3.5cqmin, 15px) !important;
-        padding: 3px 8px !important;
-      }
-
-      .select-input, .trans-chip, .btn-action {
-        font-size: clamp(11px, 3.2cqmin, 13px) !important;
-        min-height: 38px !important;
-        padding: 4px 8px !important;
-        touch-action: manipulation !important;
-      }
-
-      .slider-wrap {
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 8px !important;
-      }
-
-      .range-input {
-        flex: 1 !important;
-        height: 28px !important;
-      }
-    }
-
-
-
-    
-    
-    /* 1. PC / DESKTOP VIEW (EXACTLY AS IT WAS - FULLSCREEN EDGE-TO-EDGE) */
     @media (min-width: 769px) {
       html, body {
         width: 100vw !important;
@@ -1941,11 +1458,15 @@
       }
     }
 
-    /* 2. MOBILE VIEW ONLY (NATURAL VERTICAL SCROLLING WITH GENEROUS ROOM) */
+    /* =========================================================================
+       2. ANDROID & MOBILE WEB VIEW (CLEAN, NATURAL FLOW, ZERO OVERLAPPING)
+       ========================================================================= */
     @media (max-width: 768px) {
       html, body {
+        width: 100% !important;
         height: auto !important;
         min-height: 100% !important;
+        overflow-x: hidden !important;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
         margin: 0 !important;
@@ -1956,13 +1477,14 @@
         width: 100% !important;
         height: auto !important;
         min-height: 100vh !important;
-        overflow-y: visible !important;
-        padding: 12px 10px 60px 10px !important;
+        overflow: visible !important;
+        padding: 10px 8px 40px 8px !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 20px !important;
+        gap: 14px !important;
         box-sizing: border-box !important;
         border: none !important;
+        border-radius: 0 !important;
       }
 
       .mode-panel.active {
@@ -1970,157 +1492,183 @@
         flex-direction: column !important;
         height: auto !important;
         overflow: visible !important;
-        gap: 20px !important;
+        gap: 14px !important;
+        width: 100% !important;
       }
 
-      /* Compact Top Header Bar */
+      /* 📱 Top Header Bar: Clean 2-Row Stacked Layout (Never overlaps slots) */
       .config-header {
-        position: relative !important;
+        position: static !important;
+        z-index: auto !important;
         width: 100% !important;
-        margin-bottom: 16px !important;
-        padding: 8px 4px !important;
-        background: rgba(0, 0, 0, 0.95) !important;
-        border-bottom: 2px solid #ff1e42 !important;
-        z-index: 100 !important;
+        height: auto !important;
+        min-height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+        padding: 8px 6px !important;
+        box-sizing: border-box !important;
+        border-radius: 8px !important;
+        flex-shrink: 0 !important;
       }
 
       .config-title {
         font-size: clamp(14px, 4.5cqmin, 18px) !important;
         text-align: center !important;
-        padding: 4px 8px !important;
-        margin-bottom: 6px !important;
+        margin: 0 !important;
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
       }
 
       .config-header-actions {
-        display: flex !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
         gap: 6px !important;
         width: 100% !important;
+        box-sizing: border-box !important;
       }
 
-      .config-header-actions .btn-action {
-        flex: 1 !important;
-        min-height: 44px !important;
+      .config-header-actions #loadDraftBtn,
+      .config-header-actions .btn-action:nth-child(1) {
+        grid-column: 1 / 2 !important;
+        min-height: 42px !important;
         font-size: clamp(11px, 3cqmin, 13px) !important;
-        justify-content: center !important;
+        display: flex !important;
         align-items: center !important;
-        display: flex !important;
+        justify-content: center !important;
       }
 
-      /* Polaroid Cards Carousel with 20px Top Clearance */
+      .config-header-actions #saveDraftBtn,
+      .config-header-actions .btn-action:nth-child(2) {
+        grid-column: 2 / 3 !important;
+        min-height: 42px !important;
+        font-size: clamp(11px, 3cqmin, 13px) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      .config-header-actions #exportWidgetBtn,
+      .config-header-actions .btn-action:nth-child(3) {
+        grid-column: 1 / -1 !important;
+        min-height: 46px !important;
+        font-size: clamp(12px, 3.5cqmin, 14px) !important;
+        font-weight: 900 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      /* 📸 Polaroid Slots: Horizontal Swipeable Snap Carousel with Zero Overlap */
       .polaroid-row {
-        position: relative !important;
-        display: flex !important;
-        grid-template-columns: none !important;
-        overflow-x: auto !important;
-        scroll-snap-type: x mandatory !important;
-        padding: 12px 6px !important;
-        margin-top: 16px !important;
-        margin-bottom: 16px !important;
-        gap: 14px !important;
-        -webkit-overflow-scrolling: touch !important;
-        z-index: 10 !important;
-      }
-
-      .polaroid-card {
-        flex: 0 0 140px !important;
-        width: 140px !important;
-        height: 210px !important;
-        aspect-ratio: 2 / 3 !important;
-        scroll-snap-align: center !important;
-      }
-
-      /* Adjust Photo Panel IMMEDIATELY BELOW Slots */
-      .adjust-photo-row {
-        position: relative !important;
-        width: 100% !important;
-        margin-top: 12px !important;
-        margin-bottom: 20px !important;
-        padding: 12px 10px !important;
-        background: rgba(0, 0, 0, 0.95) !important;
-        border: 2px solid var(--accent-red, #ff1e42) !important;
-        border-radius: 8px !important;
-        z-index: 15 !important;
-      }
-
-      /* Main Controls Panel */
-      .controls-row {
-        position: relative !important;
-        width: 100% !important;
-        margin-top: 16px !important;
-        gap: 10px !important;
-        padding: 10px 8px !important;
-        z-index: 10 !important;
-      }
-    }
-
-
-    /* =========================================================================
-       MOBILE-ONLY LAYOUT FIX: Natural flow, zero overlap
-       ========================================================================= */
-    @media (max-width: 768px) {
-      html, body {
-        height: auto !important;
-        min-height: 100% !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-      }
-
-      .widget-container {
-        height: auto !important;
-        min-height: 100vh !important;
-        overflow: visible !important;
-        padding-bottom: 40px !important;
-      }
-
-      .mode-panel.active {
-        height: auto !important;
-        overflow: visible !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 12px !important;
-      }
-
-      /* Header: static flow, no stacking above slots */
-      .config-header {
         position: static !important;
         z-index: auto !important;
+        display: flex !important;
+        flex-direction: row !important;
+        grid-template-columns: none !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scroll-snap-type: x mandatory !important;
+        padding: 8px 4px 16px 4px !important;
+        margin: 0 !important;
+        gap: 14px !important;
+        -webkit-overflow-scrolling: touch !important;
         width: 100% !important;
+        box-sizing: border-box !important;
         flex-shrink: 0 !important;
       }
 
-      .config-header-actions {
+      .polaroid-card {
+        flex: 0 0 135px !important;
+        width: 135px !important;
+        height: 200px !important;
+        aspect-ratio: 2 / 3 !important;
+        scroll-snap-align: start !important;
+        box-sizing: border-box !important;
+      }
+
+      /* 🎛️ Controls Area & Rows: Clean Touch-Friendly Stacking */
+      .config-controls-bar {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        position: static !important;
+        z-index: auto !important;
+        flex-shrink: 0 !important;
+      }
+
+      .controls-row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        width: 100% !important;
+        padding: 8px 6px !important;
+        box-sizing: border-box !important;
+      }
+
+      .controls-row > div {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+      }
+
+      .theme-select-box-wrap {
+        flex: 1 !important;
+        width: auto !important;
+      }
+
+      .select-input, .trans-chip, .btn-action {
+        min-height: 42px !important;
+        font-size: clamp(11px, 3.2cqmin, 13px) !important;
+        touch-action: manipulation !important;
+        box-sizing: border-box !important;
+      }
+
+      .transition-swatches {
         display: flex !important;
         flex-wrap: wrap !important;
         gap: 6px !important;
         width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: visible !important;
       }
 
-      .config-header-actions .btn-action {
-        flex: 1 1 auto !important;
-        min-width: 80px !important;
-        min-height: 40px !important;
-        font-size: 11px !important;
-        padding: 6px 8px !important;
+      .transition-swatches .trans-chip {
+        flex: 1 1 calc(25% - 6px) !important;
+        min-width: 60px !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 8px 4px !important;
       }
 
-      /* Slots: static flow below header */
-      .polaroid-row {
-        position: static !important;
-        z-index: auto !important;
-        flex-shrink: 0 !important;
-        margin-top: 8px !important;
+      .slider-wrap {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
       }
 
-      /* Adjust photo: static flow below slots */
-      .adjust-photo-row,
-      .controls-row {
-        position: static !important;
-        z-index: auto !important;
-        flex-shrink: 0 !important;
+      .range-input {
+        flex: 1 !important;
+        height: 32px !important;
+      }
+
+      /* Adjust Photo Row: Clean vertical stacking on mobile */
+      #panZoomControlRow {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        align-items: stretch !important;
       }
     }
-
-</style>
+  </style>
 </head>
 <body class="fx-enabled">
 
