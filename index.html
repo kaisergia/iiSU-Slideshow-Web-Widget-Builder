@@ -1691,7 +1691,9 @@
       }
 
       /* Adjust Photo Row: Placed IMMEDIATELY BELOW Polaroid Slots on Mobile */
-      #panZoomControlRow {
+            #panZoomControlRow.hidden, .controls-row.hidden { display: none !important; }
+
+#panZoomControlRow {
         order: -1 !important;
         display: flex !important;
         flex-direction: column !important;
@@ -2488,6 +2490,21 @@
           else card.classList.remove('active');
         }
       }
+
+      const slotData = currentConfig.images[idx];
+      const panXSlider = document.getElementById('panXSlider');
+      const panYSlider = document.getElementById('panYSlider');
+      const zoomSlider = document.getElementById('zoomSlider');
+      const zoomVal = document.getElementById('zoomVal');
+      const fitCoverBtn = document.getElementById('toggleFitCoverBtn');
+
+      if (slotData) {
+        if (panXSlider) panXSlider.value = slotData.panX || 0;
+        if (panYSlider) panYSlider.value = slotData.panY || 0;
+        if (zoomSlider) zoomSlider.value = slotData.scale || 1.0;
+        if (zoomVal) zoomVal.textContent = (slotData.scale || 1.0).toFixed(2) + 'x';
+        if (fitCoverBtn) fitCoverBtn.textContent = (slotData.fitMode === 'contain') ? '🖼️ Mode: FIT' : '🖼️ Mode: COVER';
+      }
     }
 
     function applySlotTransform(idx) {
@@ -2600,9 +2617,12 @@
           e.preventDefault(); e.stopPropagation();
           const panZoomRow = document.getElementById('panZoomControlRow');
           if (panZoomRow) {
-            if (panZoomRow.style.display === 'none') {
+            const isHidden = panZoomRow.classList.contains('hidden') || panZoomRow.style.display === 'none';
+            if (isHidden) {
+              panZoomRow.classList.remove('hidden');
               panZoomRow.style.display = 'flex';
             } else {
+              panZoomRow.classList.add('hidden');
               panZoomRow.style.display = 'none';
             }
           }
@@ -2678,12 +2698,14 @@
         closeBtn.addEventListener('click', (e) => {
           e.preventDefault(); e.stopPropagation();
           const panZoomRow = document.getElementById('panZoomControlRow');
-          if (panZoomRow) panZoomRow.style.display = 'none';
+          if (panZoomRow) {
+            panZoomRow.classList.add('hidden');
+            panZoomRow.style.display = 'none';
+          }
         });
       }
     }
 
-    // Config Controls Listeners
     function setupConfigControls() {
       const themeSelect = document.getElementById('themeSelect');
       const fxToggleSelect = document.getElementById('fxToggleSelect');
