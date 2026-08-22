@@ -1869,6 +1869,49 @@
       }
     }
 
+
+
+    /* PERSONA PHANTOM LIGHTNING SLASH ANIMATION FIX */
+    .persona-slash-layer {
+      position: absolute !important;
+      inset: 0 !important;
+      pointer-events: none !important;
+      z-index: 50 !important;
+      display: block !important;
+      overflow: hidden !important;
+    }
+
+    .p5-lightning-slash {
+      position: absolute !important;
+      inset: -20% !important;
+      background: url("./assets/images/persona/p5_lightning_slash.png") center center / cover no-repeat !important;
+      pointer-events: none !important;
+      opacity: 0 !important;
+      transform: scale(0.8) rotate(-15deg) !important;
+      transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    }
+
+    .persona-slash-layer.slash-active .p5-lightning-slash {
+      opacity: 1 !important;
+      transform: scale(1.1) rotate(0deg) !important;
+    }
+
+    .p5-star-actor {
+      position: absolute !important;
+      width: clamp(60px, 15cqmin, 110px) !important;
+      height: clamp(60px, 15cqmin, 110px) !important;
+      pointer-events: none !important;
+      opacity: 0 !important;
+      transform: scale(0.5) rotate(-20deg) !important;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+      z-index: 55 !important;
+    }
+
+    .persona-slash-layer.slash-active .p5-star-actor {
+      opacity: 1 !important;
+      transform: scale(1.15) rotate(5deg) !important;
+    }
+
 </style>
 </head>
 <body class="fx-enabled">
