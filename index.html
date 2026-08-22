@@ -1719,12 +1719,20 @@
         height: 32px !important;
       }
 
-      /* Adjust Photo Row */
+      /* 📷 Adjust Photo Row: Placed IMMEDIATELY below Polaroid Slots on Mobile */
       #panZoomControlRow {
+        order: -1 !important;
         display: flex !important;
         flex-direction: column !important;
         gap: 10px !important;
         align-items: stretch !important;
+        margin-top: 0 !important;
+        margin-bottom: 12px !important;
+        padding: 10px 8px !important;
+        border-top: none !important;
+        border-bottom: 1.5px dashed var(--border-dark) !important;
+        background: rgba(0, 0, 0, 0.3) !important;
+        border-radius: 8px !important;
       }
     }
   
