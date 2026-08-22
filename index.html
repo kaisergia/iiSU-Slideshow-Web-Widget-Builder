@@ -1722,12 +1722,7 @@
       /* 📷 Adjust Photo Row: Placed IMMEDIATELY below Polaroid Slots on Mobile */
       #panZoomControlRow {
         order: -1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        align-items: stretch !important;
-        margin-top: 0 !important;
-        margin-bottom: 12px !important;
+        display: flex; flex-direction: column !important; gap: 10px !important; align-items: stretch !important; margin-top: 0 !important; margin-bottom: 12px !important;
         padding: 10px 8px !important;
         border-top: none !important;
         border-bottom: 1.5px dashed var(--border-dark) !important;
@@ -1948,6 +1943,8 @@
       box-shadow: 2px 2px 0px #ffd700;
     }
   
+  
+    #panZoomControlRow.hidden { display: none !important; }
   </style>
 </head>
 <body class="fx-enabled">
