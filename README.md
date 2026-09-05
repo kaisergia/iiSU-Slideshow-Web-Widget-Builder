@@ -19,3 +19,7 @@ npx vercel
 - **Interactive Web Studio**: Persona Phantom, Cozy ACNH, Retro CRT, and Cyberpunk themes.
 - **1-Click Export**: Generates an offline-ready `iiSU_PhotoSlideshow_Widget.html` pre-baked with photos and settings.
 - **Zero-Setup iiSU Auto-Play**: When loaded into iiSU, the exported widget plays immediately with 0 setup required inside the launcher.
+
+## 🎨 Attributions & Credits
+- <a href="https://www.flaticon.com/free-icons/canvas" title="canvas icons" target="_blank" rel="noopener noreferrer">Canvas icons created by Magnific - Flaticon</a>
+
