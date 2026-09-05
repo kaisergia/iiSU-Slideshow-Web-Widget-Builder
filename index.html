@@ -3099,6 +3099,9 @@
                 if (getReq.result && getReq.result.data) {
                   currentConfig = Object.assign({}, defaultConfig, getReq.result.data);
                   populateConfigUI();
+                  applyTheme(currentConfig.theme);
+                  applyFxState(currentConfig.fxEnabled);
+                  if (typeof CustomSelectEngine !== 'undefined') CustomSelectEngine.syncAll();
                 }
               };
             } catch(err){}
@@ -3577,6 +3580,9 @@
                     }
                   });
                   populateThemeDropdown();
+                  applyTheme(currentConfig.theme);
+                  applyFxState(currentConfig.fxEnabled);
+                  if (typeof CustomSelectEngine !== 'undefined') CustomSelectEngine.syncAll();
                   if (typeof callback === 'function') callback();
                 };
               } catch(err) {
@@ -3769,7 +3775,14 @@
           mainVideoEl.style.filter = blur > 0 ? ('blur(' + blur + 'px)') : 'none';
           if (mainVideoDim) mainVideoDim.style.opacity = (1 - opacity) * 0.5;
           mainVideoLayer.style.display = 'block';
-          mainVideoEl.play().catch(() => {});
+          mainVideoEl.muted = true;
+          const playPromise = mainVideoEl.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {
+              mainVideoEl.muted = true;
+              mainVideoEl.play().catch(() => {});
+            });
+          }
         } else {
           mainVideoLayer.style.display = 'none';
           mainVideoEl.pause();
@@ -4166,7 +4179,9 @@
       selectIds.forEach(id => {
         const sel = document.getElementById(id);
         if (sel) {
-          sel.dispatchEvent(new Event('change'));
+          if (typeof Event !== 'undefined') {
+            try { sel.dispatchEvent(new Event('change')); } catch(e){}
+          }
           if (typeof sel._customSelectEngineUpdate === 'function') {
             sel._customSelectEngineUpdate();
           }
@@ -5623,7 +5638,11 @@
     }
 
     function initAllListeners() {
-      ThemeStorage.init();
+      ThemeStorage.init(() => {
+        applyTheme(currentConfig.theme);
+        applyFxState(currentConfig.fxEnabled);
+        if (typeof CustomSelectEngine !== 'undefined') CustomSelectEngine.syncAll();
+      });
       const leafImgs = document.querySelectorAll('.falling-acnh-leaf');
       leafImgs.forEach(img => { img.src = LEAF_B64; });
 
