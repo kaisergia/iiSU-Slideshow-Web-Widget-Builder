@@ -4178,13 +4178,8 @@
       ];
       selectIds.forEach(id => {
         const sel = document.getElementById(id);
-        if (sel) {
-          if (typeof Event !== 'undefined') {
-            try { sel.dispatchEvent(new Event('change')); } catch(e){}
-          }
-          if (typeof sel._customSelectEngineUpdate === 'function') {
-            sel._customSelectEngineUpdate();
-          }
+        if (sel && typeof sel._customSelectEngineUpdate === 'function') {
+          sel._customSelectEngineUpdate();
         }
       });
     }
@@ -4771,6 +4766,7 @@
           applyBtn.onclick = () => {
             currentConfig.theme = t.id;
             applyTheme(t.id);
+            autoSaveConfigInRealTime();
             this.close();
           };
 
@@ -5507,6 +5503,7 @@
             ThemeStorage.saveCustomTheme(this.currentDraft);
             currentConfig.theme = this.currentDraft.id;
             applyTheme(this.currentDraft.id);
+            autoSaveConfigInRealTime();
             this.close();
           };
         }
